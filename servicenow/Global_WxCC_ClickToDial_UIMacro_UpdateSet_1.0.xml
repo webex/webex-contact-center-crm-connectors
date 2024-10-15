@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2024-07-09 13:28:55">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>For use with Cisco Webex Contact Center application.
+This Update Set installs the UI macro "click_to_call_wxcc".</description>
+<inserted/>
+<name>Cisco WxCC - Click To Dial Macro</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>50dcac61c35f0650a721f1d4e4013187</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2024-07-09 13:28:54</sys_created_on>
+<sys_id>32c3b469c35f0650a721f1d4e4013185</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2024-07-09 13:28:54</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_macro_73062829c31f0650a721f1d4e40131af</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_macro"&gt;&lt;sys_ui_macro action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;category&gt;general&lt;/category&gt;&lt;description&gt;Click to call UI Macro for Cisco Webex Contact Center&lt;/description&gt;&lt;media_type/&gt;&lt;name&gt;click_to_call_wxcc&lt;/name&gt;&lt;scoped_name/&gt;&lt;sys_class_name&gt;sys_ui_macro&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-07-09 12:31:17&lt;/sys_created_on&gt;&lt;sys_id&gt;73062829c31f0650a721f1d4e40131af&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;click_to_call_wxcc&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_macro_73062829c31f0650a721f1d4e40131af&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-07-09 12:37:16&lt;/sys_updated_on&gt;&lt;xml&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null"&gt;
+&lt;j:set var="jvar_n" value="${ref}" /&gt;
+&lt;g:inline template="ie_checker.xml" /&gt;
+&lt;!-- show phone icon for sys_user ref field --&gt;
+&lt;g2:evaluate var="jvar_show_phone" object="true" jelly="true"&gt;
+	var show_phone = false;
+	var phone_fields = '';
+	var phone_labels = '';	
+	var phone_numbers = '';	
+	var is_reference = false;
+	var settings = (new sn_openframe.OpenFrameAjaxUtility).getOpenFrameConfiguration();
+	if (settings==='{}'){
+		show_phone = false;		
+	} else {
+		if(gs.hasRole('sn_openframe_user')){
+			var ed = __ref__.getED();
+			if (!gs.nil(ed)) {
+				if (ed.isReference()) {
+					is_reference = true;
+					var ref_gr = __ref__.getRefRecord();
+					if (!gs.nil(ref_gr)) {
+						var ge;
+						var fieldType;
+						var list = ref_gr.getFields();
+						for (var i = 0; i != list.size(); ++i) {
+							ge = list.get(i);
+							fieldType = ge.getED().getInternalType();
+							if(fieldType == 'ph_number' || fieldType == 'phone_number_e164') {
+								if(ref_gr.getValue(ge.getName()) != null) {
+									show_phone = true;	
+									phone_fields == '' ? phone_fields += ge.getName() : phone_fields += ',' + ge.getName();
+									phone_labels == '' ? phone_labels += ge.getLabel() : phone_labels += ',' + ge.getLabel();
+									phone_numbers == '' ? phone_numbers += ref_gr.getValue(ge.getName()) : phone_numbers += ',' + ref_gr.getValue(ge.getName());
+								}
+							}
+						}	
+					}
+				} else {
+					phone_fields += __ref__.getName();
+					phone_labels += __ref__.getLabel();
+					phone_numbers += __ref__.getDisplayValue();
+					show_phone = true;
+				}
+			}
+		}
+		if (jelly.jvar_isMSIE == 'true') {
+			if (jelly.jvar_MSIE_vn ${AMP}lt; 10 ) {
+				show_phone = false;
+			}
+		} 
+	
+		
+	}
+	show_phone;
+&lt;/g2:evaluate&gt;
+  &lt;j2:if test="$[jvar_show_phone  == 'true']"&gt;
+	  	  
+	&lt;a id="phone_icon_${jvar_n}" data-show-phone="${jvar_show_phone}"
+	    data-phone-fields="$[phone_fields]"
+	    data-phone-labels="$[phone_labels]"
+	    data-phone-numbers="$[phone_numbers]"
+	    data-is-reference="$[is_reference]"
+		data-task-id="$[__ref__.__parent__.sys_id]"
+	    style="text-decoration: none;"&gt;
+		&lt;span id="icon_${jvar_n}"
+			onclick="processWxCcPhoneClick(this)"
+			name="${jvar_n}"
+			aria-label="${HTML:gs.getMessage('Call')}"
+			title="${gs.getMessage('Call')}"
+			alt="${gs.getMessage('Call')}"
+			class="icon ref-button icon-phone btn btn-default btn-ref disabled"&gt;&lt;/span&gt;
+	&lt;/a&gt;
+
+	&lt;script&gt;
+
+		function processWxCcPhoneClick(element) {
+			try {
+				var p = $j(gel("phone_"+element.id));
+				if (p.length &gt; 0) {
+					
+					var labelsArray = p.attr('data-phone-labels').split(',');
+					var numbersArray = p.attr('data-phone-numbers').split(',');
+					var isReference = p.attr('data-is-reference');
+					
+					// For non reference fields, the current field value will be called and not the stored value
+					if (isReference === 'false') {
+						var phoneField = p.attr('data-phone-fields');
+						numbersArray = [g_form.getValue(phoneField)];
+					}
+		
+					var metaData = {"phoneLabels":labelsArray, "phoneNumbers":numbersArray, "taskId":p.attr('data-task-id')};
+					
+					var data =    {"metaData":metaData};
+					var payload = {"type": "OUTGOING_CALL", "data" : data};
+					var context = {"payload": payload, "method" : "openframe_communication" };
+					jslog("context : "+ JSON.stringify(context));
+					CustomEvent.fireAll("openframe_request", context);
+				}
+			} catch (e) {
+				jslog("error at processWxCcPhoneClick : " + e);
+			}
+		}
+		
+		function showWxCcPhoneIcon(element, original, changed, loading) {
+			CustomEvent.observe('bs_click_to_call_enabled', function(value) {
+				var q = $j(gel("phone_icon_"+element.id));
+				var isReference = q.attr('data-is-reference');
+				var p = $j(gel('icon_' + element.id));
+				var phoneField = q.attr('data-phone-fields');
+				
+				// disable the button if the field is not a reference field and if the current value is empty
+				if (isReference === 'false') {
+					if (g_form.getValue(phoneField) === '') {
+						p.addClass('disabled');
+						return;
+					} 
+				}
+				if(value == true) {
+					if (p.hasClass('disabled')) {
+						p.removeClass('disabled');
+					}
+				} else {
+					p.addClass('disabled');
+				}
+			});
+			var payload = {"type": "GET_VOICE_STATE" };
+			var context = {"payload": payload, "method" : "openframe_communication" };
+			CustomEvent.fireAll("openframe_request", context);
+		}
+		var n = '${ref}'.replace(/\./g, '_');
+		var h = new GlideEventHandler('onChange_' + n, showWxCcPhoneIcon, '${ref}');
+		g_event_handlers.push(h);
+	&lt;/script&gt;  
+&lt;/j2:if&gt;	  
+&lt;/j:jelly&gt;]]&gt;&lt;/xml&gt;&lt;/sys_ui_macro&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1202056768</payload_hash>
+<remote_update_set display_value="wxccClickToCallUiMacro1.0">32c3b469c35f0650a721f1d4e4013185</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2024-07-09 13:28:54</sys_created_on>
+<sys_id>f2c3b469c35f0650a721f1d4e4013185</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>190977f88cd0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2024-07-09 13:28:54</sys_updated_on>
+<table/>
+<target_name>click_to_call_wxcc</target_name>
+<type>Macro</type>
+<update_domain>global</update_domain>
+<update_guid>def7e469e31f065096c2263f14f98e5d</update_guid>
+<update_guid_history>def7e469e31f065096c2263f14f98e5d:1202056768,6a96e429fb1f0650eca0f265461049df:-1396908880</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
