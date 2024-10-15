@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<callCenter xmlns="http://soap.sforce.com/2006/04/metadata">
+  <section sortOrder="0" name="wxCCReqData" label="WxCC Settings">
+    <item sortOrder="0" name="openCtiWxCCRegion" label="WxCC Region">eu2</item>
+  </section>
+  <section sortOrder="1" name="reqGeneralInfo" label="General Information">
+		<item sortOrder="0" name="reqInternalName" label="Internal Name">wxCcCallCenter</item>
+		<item sortOrder="1" name="reqDisplayName" label="Display Name">WxCC Call Center</item>
+		<item sortOrder="2" name="reqDescription" label="Description">Webex Contact Center Salesforce Integration</item>
+		<item sortOrder="3" name="reqAdapterUrl" label="CTI Adapter URL">https://wxcc-crmconnectors.ciscoccservice.com/salesforce/connector/v1/index.html</item>
+    <item sortOrder="4" name="reqUseApi" label="Use CTI API">true</item>
+    <item sortOrder="5" name="reqSoftphoneHeight" label="Softphone Height">550</item>
+    <item sortOrder="6" name="reqSoftphoneWidth" label="Softphone Width">400</item>
+    <item sortOrder="7" name="reqSalesforceCompatibilityMode" label="Salesforce Compatibility Mode">Lightning</item>
+  </section>
+<section sortOrder="2" name="wxCCCallActivity" label="Call Activity Record Creation">
+		<item sortOrder="0" name="subjectDateFormat" label="Date Format In Subject">MM-DD-YYYY hh:mm a</item>
+		<item sortOrder="1" name="subjectTemplate" label="Subject Template">{direction} Call {activityDatetime}</item>
+    <item sortOrder="2" name="recordCallLiveNotes" label="Record Call Live Notes">true</item>
+    <item sortOrder="3" name="liveCallNotesFieldMapping" label="Live Call Notes Field Mapping">Description</item>
+    <item sortOrder="4" name="changeActivityRecordOwnership" label="Change Activity Record Ownership For Transferred Calls">false</item>
+    <item sortOrder="5" name="cadVarNameWithActivityId" label="CAD Variable Name That Holds Activity Id"></item>
+    <item sortOrder="6" name="objectFieldMapping" label="Object Field Mappings"></item>
+  </section>
+  <section sortOrder="3" name="outdialData" label="Outdial Configuration">
+    <item sortOrder="0" name="outdialRemovePrefix" label="Remove Phone Number Prefix Strings"></item>
+  </section>
+  <section sortOrder="4" name="advancedScreenPopData" label="Advanced Screen Pop Search Configuration">
+    <item sortOrder="0" name="openCtiEnableAdvancedScreenPop" label="Advanced Screen Pop Enabled">false</item>
+    <item sortOrder="1" name="openCtiCadSearchVariable" label="CAD Variable Name"></item>
+    <item sortOrder="2" name="openCtiRemoveANIPrefix" label="Remove ANI Prefix Strings"></item>
+  </section>
+  <section sortOrder="5" name="objectCreationManagement" label="Case Management">
+    <item sortOrder="0" name="createObjectIncoming" label="Auto Case Creation For Inbound Calls">false</item>
+    <item sortOrder="1" name="createObjectOutgoing" label="Auto Case Creation For Outbound calls">false</item>
+    <item sortOrder="2" name="openInEditMode" label="Open Case Object In Edit Mode">false</item>
+    <item sortOrder="3" name="objectFieldMapping" label="Object Field Mappings"></item>
+  </section>
+  <section sortOrder="6" name="screenpopNoRecordMatch" label="Screen Pop Settings For No Record Match">
+    <item sortOrder="0" name="noRecordMatchObjectFieldMappings" label="Object Field Mappings"></item>
+  </section>
+  <section sortOrder="7" name="omnichannelStateSyncConfiguration" label="Omni-Channel State Sync Configuration">
+    <item sortOrder="0" name="enableOmniChannelSync" label="Enable Omni-Channel Sync">false</item>
+    <item sortOrder="1" name="omniChannelNotReadyReason" label="Omni-Channel Not Ready Reason"></item>
+    <item sortOrder="2" name="wxCCIdleReasonCode" label="WxCC Idle Reason Code"></item>
+  </section>
+  <section sortOrder="8" name="widgetSettings" label="Widget Settings">
+    <item sortOrder="0" name="sendBrowserNotifications" label="Send Browser Notifications">false</item>
+  </section>
+</callCenter>
