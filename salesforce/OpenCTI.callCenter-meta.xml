@@ -2,6 +2,7 @@
 <callCenter xmlns="http://soap.sforce.com/2006/04/metadata">
   <section sortOrder="0" name="wxCCReqData" label="WxCC Settings">
     <item sortOrder="0" name="openCtiWxCCRegion" label="WxCC Region">eu2</item>
+    <item sortOrder="1" name="wxccWebRtcDomain" label="WxCC WebRTC Domain"></item> 
   </section>
   <section sortOrder="1" name="reqGeneralInfo" label="General Information">
 		<item sortOrder="0" name="reqInternalName" label="Internal Name">wxCcCallCenter</item>
