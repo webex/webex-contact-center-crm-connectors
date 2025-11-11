@@ -18,10 +18,11 @@
 		<item sortOrder="0" name="subjectDateFormat" label="Date Format In Subject">MM-DD-YYYY hh:mm a</item>
 		<item sortOrder="1" name="subjectTemplate" label="Subject Template">{direction} Call {activityDatetime}</item>
     <item sortOrder="2" name="recordCallLiveNotes" label="Record Call Live Notes">true</item>
-    <item sortOrder="3" name="liveCallNotesFieldMapping" label="Live Call Notes Field Mapping">Description</item>
-    <item sortOrder="4" name="changeActivityRecordOwnership" label="Change Activity Record Ownership For Transferred Calls">false</item>
-    <item sortOrder="5" name="cadVarNameWithActivityId" label="CAD Variable Name That Holds Activity Id"></item>
-    <item sortOrder="6" name="objectFieldMapping" label="Object Field Mappings"></item>
+    <item sortOrder="3" name="recordCallLiveSubject" label="Record Call Live Subject">true</item>
+    <item sortOrder="4" name="liveCallNotesFieldMapping" label="Live Call Notes Field Mapping">Description</item>
+    <item sortOrder="5" name="changeActivityRecordOwnership" label="Change Activity Record Ownership For Transferred Calls">false</item>
+    <item sortOrder="6" name="cadVarNameWithActivityId" label="CAD Variable Name That Holds Activity Id"></item>
+    <item sortOrder="7" name="objectFieldMapping" label="Object Field Mappings"></item>
   </section>
   <section sortOrder="3" name="outdialData" label="Outdial Configuration">
     <item sortOrder="0" name="outdialRemovePrefix" label="Remove Phone Number Prefix Strings"></item>
