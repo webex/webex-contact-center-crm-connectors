@@ -1,0 +1,30 @@
+<callCenter>
+    <!-- General Info Section. This is a required section.-->
+    <section sortOrder="0" name="reqGeneralInfo" label="General Information">
+        <item sortOrder="1" name="reqDisplayName" label="Display Name">Webex Contact Center V1</item>
+        <item sortOrder="0" name="reqInternalName" label="InternalName">WxCCContactCenterSCV</item>
+        <!-- Provide Full API Name of the Conversation Vendor Info Component present in installed vendor managed package-->
+        <item sortOrder="2" name="reqVendorInfoApiName" label="Conversation Vendor Info Developer Name">cisco_wxcc_scv__ciscoWxCC</item>
+    </section>
+    <!-- SCV Settings. This is a required section. -->
+    <section sortOrder="1" name="reqHvcc" label="SCV Settings">
+        <item sortOrder="0" name="reqTelephonyIntegrationCertificate" label="Telephony Integration Certificate">
+        </item>
+        <item sortOrder="1" name="reqLongDistPrefix" label="Long Distance Prefix"></item>
+    </section>
+    <!-- All below sections below contain vendor settings-->
+    <section sortOrder="2" name="sfdcScv" label="Webex Contact Center for Salesforce SCV">
+        <item sortOrder="0" name="wxccConnectionName" label="WxccConnection Name"></item>
+        <item sortOrder="1" name="certDevName" label="Certificate Unique Name"></item>
+        <item sortOrder="2" name="readyStateId" label="Ready State Id">&lt;Presence Status Id&gt;</item>
+        <item sortOrder="3" name="notReadyStateId" label="Not Ready State Id">&lt;Presence Status Id&gt;</item>
+        <item sortOrder="4" name="defaultCiscoNotReadyReason" label="Default Cisco Not Ready Reason">&lt;Not Ready Reason&gt;</item>
+        <item sortOrder="5" name="presenceStateMaps" label="Presence State Mapping">&lt;Presence State Mapping&gt;</item>
+        <item sortOrder="6" name="voiceCallIdCallVar" label="Call Variable for Voice Call Id">SCV_VoiceCallRecordId</item>
+        <item sortOrder="7" name="vendorCallKeyCallVar" label="Call Variable for the Vendor Call Key">SCV_VendorCallKey</item>
+        <item sortOrder="8" name="dialingRegex" label="Dialing Phone Number Translation"></item>
+        <item sortOrder="9" name="tenant" label="WxCC Tenant"></item>
+        <item sortOrder="10" name="webRtcDomain" label="WxCC WebRTC Domain"></item>
+        <item sortOrder="11" name="flags" label="flags"></item>
+    </section>
+</callCenter>
