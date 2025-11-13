@@ -25,6 +25,7 @@
         <item sortOrder="8" name="dialingRegex" label="Dialing Phone Number Translation"></item>
         <item sortOrder="9" name="tenant" label="WxCC Tenant"></item>
         <item sortOrder="10" name="webRtcDomain" label="WxCC WebRTC Domain"></item>
-        <item sortOrder="11" name="flags" label="flags"></item>
+        <item sortOrder="11" name="flags" label="Flags">Transcription;SaveRecordingLink</item>
     </section>
 </callCenter>
+
