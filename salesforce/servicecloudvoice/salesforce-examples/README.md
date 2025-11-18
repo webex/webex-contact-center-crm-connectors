@@ -48,5 +48,5 @@ Before deploying, ensure that you have:
 
 ---
 
-**Author:** Cisco WxCC Team  
-**License:** MIT
+**Author:** Cisco WebexCC Team  
+**License:** MIT License
