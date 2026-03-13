@@ -25,6 +25,9 @@
     <item sortOrder="7" name="objectFieldMapping" label="Object Field Mappings"></item>
     <item sortOrder="8" name="agentSharedRecord" label="Variable for Record Sharing"></item>
     <item sortOrder="9" name="assignActivityToSharedRecord" label="Use Activity as Shared Record by default">true</item>
+    <item sortOrder="10" name="disableActivityRecord" label="Disable Activity Record Creation">false</item>
+    <item sortOrder="11" name="openCtiEnableActivityScreenPopConnected" label="Enable Activity Screen Pop on Connected">false</item>
+    <item sortOrder="12" name="openCtiEnableActivityScreenPopWrapup" label="Enable Activity Screen Pop on Wrapup">false</item>
   </section>
   <section sortOrder="3" name="outdialData" label="Outdial Configuration">
     <item sortOrder="0" name="outdialRemovePrefix" label="Remove Phone Number Prefix Strings"></item>
