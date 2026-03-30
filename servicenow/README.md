@@ -9,7 +9,7 @@ This folder contains Webex Contact Center assets for ServiceNow integrations. Th
 | Connector | Folder | Purpose |
 | --- | --- | --- |
 | CTI | [`cti/`](./cti/README.md) | Current ServiceNow CTI update set assets |
-| ServiceNow CCIF | [`servicenow-ccif/`](./servicenow-ccif/README.md) | ServiceNow CCIF update set and Webex Contact Center sample flow assets |
+| ServiceNow CCIF | [`servicenow-ccif/`](./servicenow-ccif/README.md) | ServiceNow CCIF update set, Webex Contact Center sample flow, and ServiceNow subflow assets |
 
 ## Documentation
 
@@ -19,5 +19,5 @@ This folder contains Webex Contact Center assets for ServiceNow integrations. Th
 ## Usage notes
 
 - Use the CTI folder for the currently available ServiceNow connector assets in this repository.
-- Use the ServiceNow CCIF folder for the next-generation connector assets, including the ServiceNow update set and the Webex Contact Center sample flow template.
+- Use the ServiceNow CCIF folder for the next-generation connector assets, including the ServiceNow update set, the Webex Contact Center sample flow template, and the ServiceNow subflow update set.
 - Review the target folder README before importing update sets or planning a deployment.

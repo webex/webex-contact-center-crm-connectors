@@ -12,7 +12,7 @@ This repository contains connector assets, metadata, and deployment examples for
 | Platform | Folder | Connector types covered |
 | --- | --- | --- |
 | Salesforce | [`salesforce/`](./salesforce/README.md) | CTI, Service Cloud Voice |
-| ServiceNow | [`servicenow/`](./servicenow/README.md) | CTI, ServiceNow CCIF (update set and sample flow) |
+| ServiceNow | [`servicenow/`](./servicenow/README.md) | CTI, ServiceNow CCIF (update set, sample flow, and subflow) |
 
 ## Connector matrix
 
@@ -28,7 +28,7 @@ This repository contains connector assets, metadata, and deployment examples for
 - Salesforce CTI call center metadata used to configure the Open CTI connector.
 - Salesforce Service Cloud Voice contact center metadata, sample Salesforce routing flow assets, and a Webex Flow Designer template.
 - ServiceNow CTI update set assets for the current connector.
-- ServiceNow CCIF deployment assets, including a ServiceNow update set and a Webex Contact Center sample flow.
+- ServiceNow CCIF deployment assets, including a ServiceNow update set, a Webex Contact Center sample flow, and a ServiceNow subflow update set.
 
 ## How to use this repository
 
