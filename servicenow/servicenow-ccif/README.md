@@ -2,27 +2,25 @@
 
 ## Overview
 
-This folder is reserved for the next-generation Webex Contact Center integration for ServiceNow based on the ServiceNow Contact Center Integration Framework (CCIF). It is intended to become the repository location for future deployment assets and implementation guidance as the connector matures.
+This folder contains repository assets for the next-generation Webex Contact Center integration with ServiceNow based on the ServiceNow Contact Center Integration Framework (CCIF). The current contents provide the ServiceNow-side update set and the Webex Contact Center sample flow used to stand up and validate the integration.
 
-## Current status
+## Included assets
 
-There are no published connector artifacts in this folder yet. At this stage, the folder serves as a public placeholder for the next-generation ServiceNow integration track.
+| Asset | Purpose |
+| --- | --- |
+| [`update-set/`](./update-set/README.md) | ServiceNow update set used to load the ServiceNow CCIF application artifacts |
+| [`sample-flow/`](./sample-flow/README.md) | Webex Contact Center sample flow template used to orchestrate the ServiceNow CCIF voice workflow |
 
-## Planned scope
+## Deployment notes
 
-The target scope for this connector family includes:
+- Treat the update set and the sample flow as companion assets for the same connector track.
+- Import the ServiceNow update set into a non-production ServiceNow instance first, then validate the installed records and cross-scope behavior before moving forward.
+- Import the sample flow into Webex Contact Center Flow Designer as a starting point and replace tenant-specific values before publishing.
+- Review queue identifiers, connector bindings, authentication references, and any environment-specific variables before production use.
 
-- ServiceNow-native voice handling through CCIF-compatible components
-- Webex Contact Center routing and presence synchronization with ServiceNow
-- Native call controls and wrap-up experiences inside ServiceNow
-- Support for voice interaction data, including transcription-oriented workflows
+## Usage notes
 
-## Expected contents
-
-As repository deliverables become available, this folder is expected to hold items such as:
-
-- Installable ServiceNow application or update set assets
-- Configuration references and mapping guidance
-- Deployment notes for administrator setup
-- Example artifacts that support implementation and validation
-
+- Use the section README files in this folder for import guidance:
+  - [`update-set/README.md`](./update-set/README.md)
+  - [`sample-flow/README.md`](./sample-flow/README.md)
+- These assets are intended to accelerate implementation and validation work, not to replace customer-specific configuration and testing.
