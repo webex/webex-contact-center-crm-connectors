@@ -13,7 +13,7 @@ This folder contains the Webex Contact Center sample flow for the ServiceNow CCI
 ## What the template illustrates
 
 - Passing ServiceNow interaction context from Webex Contact Center.
-- Using shared variables such as `sharedRecordId`, `sn_queue_sysid`, `sn_queue_id`, and `time_zone`.
+- Using shared variables such as `sharedRecordId`, `sn_queue_sysid`, and `time_zone`.
 - Providing a starting point for the voice orchestration flow that works with the ServiceNow CCIF deployment.
 
 ## Import guidance
