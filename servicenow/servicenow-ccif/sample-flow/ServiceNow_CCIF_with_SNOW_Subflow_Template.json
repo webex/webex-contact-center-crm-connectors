@@ -1,0 +1,3466 @@
+{
+  "orgId": "8a247127-a462-4831-a978-737cc684422c",
+  "version": 7,
+  "id": "69cedce0626d4d494d869891",
+  "flowType": "FLOW",
+  "name": "ServiceNow_CCIF_with_SNOW_Subflow_Template",
+  "description": "This flow demonstrates a ServiceNow CCIF integration pattern that creates a ServiceNow voice interaction, executes a ServiceNow subflow, and then queues the contact in Webex Contact Center.",
+  "comment": "",
+  "variables": [
+    {
+      "name": "sharedRecordId",
+      "description": "",
+      "type": "STRING",
+      "value": null,
+      "isCAD": true,
+      "desktopLabel": "sharedRecordId",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "27d28c4f-a94f-465e-832c-423077b89850",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "Customer_Name",
+      "description": "",
+      "type": "STRING",
+      "value": "",
+      "isCAD": true,
+      "desktopLabel": "Customer_Name",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "6a88b475-345e-4166-a85d-de961204fbda",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "ServiceNow_Interaction_Description",
+      "description": "",
+      "type": "STRING",
+      "value": "Interaction from Cisco Webex CC",
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "1c4385b4-1377-427e-ac10-f93a89711b00",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "time_zone",
+      "description": "",
+      "type": "STRING",
+      "value": "Europe/Berlin",
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "18dd2f4f-d3ef-4685-aa4a-6b5951cc155a",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "Call_abandoned",
+      "description": "",
+      "type": "BOOLEAN",
+      "value": "True",
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "42fa2d4e-2dbc-4ada-81f8-df5c3eee08d6",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "sn_queue_sysid",
+      "description": "",
+      "type": "STRING",
+      "value": "31038a680f73721088272fc530d1b249",
+      "isCAD": true,
+      "desktopLabel": "sn_queue_sysid",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "d3a8ef72-cd5f-412f-8742-8bbdbe2d7069",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "sn_callvariable",
+      "description": "",
+      "type": "STRING",
+      "value": "Value for sn_callvariable",
+      "isCAD": true,
+      "desktopLabel": "sn_callvariable",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "311f296c-7c88-441c-85c0-216294107ef3",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "start_time",
+      "description": "",
+      "type": "STRING",
+      "value": null,
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "cf18557b-ba11-4d47-906c-88932fb887ce",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "sn_action_type",
+      "description": "",
+      "type": "STRING",
+      "value": "",
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "baec8230-f2af-4199-9b37-cc48c88811ef",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "sn_subflow_message",
+      "description": "",
+      "type": "STRING",
+      "value": null,
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "75352d08-a1c1-489e-958c-23b0b2c4b7dc",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "sn_subflow_code",
+      "description": "",
+      "type": "STRING",
+      "value": null,
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "aab12304-9aad-4f95-9f6d-9ef49aa3a08e",
+      "isExternalized": false,
+      "resourceType": ""
+    },
+    {
+      "name": "sn_subflow_name",
+      "description": "",
+      "type": "STRING",
+      "value": "",
+      "isCAD": false,
+      "desktopLabel": "",
+      "isAgentEditable": false,
+      "source": "",
+      "isReportable": false,
+      "overwrite": false,
+      "isSecure": false,
+      "id": "e055c203-0587-4101-9aec-c1752f8bc529",
+      "isExternalized": false,
+      "resourceType": ""
+    }
+  ],
+  "process": {
+    "activities": {
+      "c1839c44-5152-4090-9994-05062b251fe2": {
+        "id": "c1839c44-5152-4090-9994-05062b251fe2",
+        "name": "QueueContact_ew1_hva",
+        "group": "action",
+        "properties": {
+          "destination_name": "WxCcQueue",
+          "name": "QueueContact_ew1_hva",
+          "priority": null,
+          "fallbackQueue": null,
+          "description": "Queues the contact to the target Webex Contact Center queue after the ServiceNow interaction and subflow steps complete.",
+          "priority_name": null,
+          "toggle": false,
+          "activityName": "queue-contact",
+          "priority:name": null,
+          "toggleAgentAvailability": false,
+          "_renderRequestTimestamp": 1775164636751,
+          "agentAvailabilityVariable": null,
+          "fallbackQueue:type": null,
+          "queueRadioGroup": "staticQueue",
+          "priorityVariable": null,
+          "destination_type": "LONGEST_AVAILABLE_AGENT",
+          "destinationVariable": null,
+          "activityId": "5f114550ef5cfc454fbbf133",
+          "priorityRadioGroup": null,
+          "fallbackQueue:name": null,
+          "fallbackQueue_name": null,
+          "destination:type": "LONGEST_AVAILABLE_AGENT",
+          "skills": null,
+          "fallbackQueue_type": null,
+          "destination:name": "WxCcQueue",
+          "flowDecryptAccess": true,
+          "destination": "cb6d8d56-d7c8-4a35-af00-e0a197d52f50",
+          "agentAvailabilityRadioGroup": null
+        }
+      },
+      "2800059e-5fd5-4fa7-93f1-096e221edff2": {
+        "id": "2800059e-5fd5-4fa7-93f1-096e221edff2",
+        "name": "PlayMusic_mi9",
+        "group": "action",
+        "properties": {
+          "duration": null,
+          "name": "PlayMusic_mi9",
+          "prompt:type": null,
+          "activityName": "play-music",
+          "prompt:name": "defaultmusic_on_hold.wav",
+          "_renderRequestTimestamp": 1775164636751,
+          "prompt": "defaultmusic_on_hold.wav",
+          "skip": 0,
+          "activityId": "5faa2ad13505f538acc86afc",
+          "prompt_type": null,
+          "promptDynamic": null,
+          "prompt_name": "defaultmusic_on_hold.wav",
+          "audioRadioGroup": "staticAudio",
+          "flowDecryptAccess": false,
+          "description": "Plays music while the contact waits in the queue-handling branch."
+        }
+      },
+      "28f963d1-7cbd-47d2-803d-6f0f4e17d395": {
+        "id": "28f963d1-7cbd-47d2-803d-6f0f4e17d395",
+        "name": "PlayMusic_keb",
+        "group": "action",
+        "properties": {
+          "duration": "60",
+          "name": "PlayMusic_keb",
+          "prompt:type": null,
+          "activityName": "play-music",
+          "prompt:name": "defaultmusic_on_hold.wav",
+          "_renderRequestTimestamp": 1775164636751,
+          "prompt": "defaultmusic_on_hold.wav",
+          "skip": 0,
+          "activityId": "5faa2ad13505f538acc86afc",
+          "prompt_type": null,
+          "promptDynamic": null,
+          "prompt_name": "defaultmusic_on_hold.wav",
+          "audioRadioGroup": "staticAudio",
+          "flowDecryptAccess": false,
+          "description": "Plays music on hold for the active in-queue wait period."
+        }
+      },
+      "61af7935-c570-48f1-8d28-021bd414e23c": {
+        "id": "61af7935-c570-48f1-8d28-021bd414e23c",
+        "name": "DisconnectContact_i6c",
+        "group": "terminating-action",
+        "properties": {
+          "name": "DisconnectContact_i6c",
+          "activityName": "disconnect-contact",
+          "activityId": "5faa898c8bf5b65b82f0706b",
+          "_renderRequestTimestamp": 1775164636751,
+          "description": "Disconnects the contact if the flow reaches the terminal hold branch without continuing service."
+        }
+      },
+      "8465e99b-60fd-4991-b72b-20a9f4d981d5": {
+        "id": "8465e99b-60fd-4991-b72b-20a9f4d981d5",
+        "name": "NewPhoneContact",
+        "group": "start",
+        "properties": {
+          "name": "NewPhoneContact",
+          "event": "NewPhoneContact",
+          "flowType": {
+            "eventSourceName": "WebexContactCenter",
+            "eventSpecificationName": "ContactStartWorkflow",
+            "eventClassificationId": "5f10475cf021306e89e1692c",
+            "eventClassificationName": "VoiceInteractions",
+            "eventSpecificationId": "5f2d02144332507e39cc8a7f",
+            "eventSourceId": "5eff0e2eb10162499bc9f932"
+          },
+          "activityName": "NewPhoneContact",
+          "_renderRequestTimestamp": 1775164636751,
+          "activityId": "start",
+          "description": "Starts the inbound ServiceNow CCIF sample flow when a new phone contact arrives."
+        }
+      },
+      "407ae12a-3854-4a21-bfdf-3fbaf3e7d08f": {
+        "id": "407ae12a-3854-4a21-bfdf-3fbaf3e7d08f",
+        "name": "PlayMessage_tih",
+        "group": "action",
+        "properties": {
+          "connector_name": "Cisco Cloud Text-to-Speech",
+          "name": "PlayMessage_tih",
+          "connector:type": "Cisco Cloud Text-to-Speech",
+          "toggle": true,
+          "activityName": "play-message",
+          "prompts": null,
+          "_renderRequestTimestamp": 1775164636752,
+          "connector_type": "Cisco Cloud Text-to-Speech",
+          "connector:name": "Cisco Cloud Text-to-Speech",
+          "activityId": "5f114466ef5cfc454fbbf131",
+          "volumeGainDb": 0,
+          "voiceLanguage_name": null,
+          "promptsTts": [
+            {
+              "type": "tts",
+              "value": "HEllo, welcome to the flow template for Cisco - Service C C I F integration",
+              "name": "HEllo, welcome to the flow template for Cisco - Service C C I F integration"
+            }
+          ],
+          "connector": "Cisco Cloud Text-to-Speech",
+          "speakingRate": 1,
+          "toggleLanguage": null,
+          "voiceLanguage": null,
+          "flowDecryptAccess": false,
+          "voiceLanguage:name": null,
+          "description": "Plays the welcome prompt before the ServiceNow interaction is created."
+        }
+      },
+      "540ec8c0-5b96-4f93-a172-c791ea7dafeb": {
+        "id": "540ec8c0-5b96-4f93-a172-c791ea7dafeb",
+        "name": "SetVariable_iw8_qf0_1g5_fdz_wfq",
+        "group": "set-variable",
+        "properties": {
+          "setTo": "set-to-literal",
+          "name": "SetVariable_iw8_qf0_1g5_fdz_wfq",
+          "srcVariableType": "STRING",
+          "literal_invalid_error": false,
+          "activityName": "set-variable",
+          "_renderRequestTimestamp": 1775164636752,
+          "expr": "31038a680f73721088272fc530d1b249",
+          "activityId": "set-variable",
+          "setVariablesArray": [
+            {
+              "setTo": "set-to-literal",
+              "srcVariableType": "STRING",
+              "literal_invalid_error": false,
+              "expr": "31038a680f73721088272fc530d1b249",
+              "id": "bc537a0c-1852-4dcf-b6a7-fc0f5b05b9b9",
+              "literal": "31038a680f73721088272fc530d1b249",
+              "srcVariable": "sn_queue_sysid"
+            },
+            {
+              "setTo": "set-to-literal",
+              "srcVariableType": "STRING",
+              "literal_invalid_error": false,
+              "expr": "{{ now() | date(\"yyyy-MM-dd HH:mm:ss\", existingFormat=\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", timeZone=\"America/New_York\") }}",
+              "id": "b16fc848-32e8-4193-881f-78ebed85a539",
+              "literal": "{{ now() | date(\"yyyy-MM-dd HH:mm:ss\", existingFormat=\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", timeZone=\"America/New_York\") }}",
+              "srcVariable": "start_time"
+            }
+          ],
+          "flowDecryptAccess": true,
+          "srcVariable": "sn_queue_sysid",
+          "description": "Sets the ServiceNow queue sys_id and captures the formatted call start time for the interaction payload."
+        }
+      },
+      "d3b2bf1e-204e-4544-be41-e317418fb513": {
+        "id": "d3b2bf1e-204e-4544-be41-e317418fb513",
+        "name": "Create_Voice_Interaction_mff_oh8",
+        "group": "action",
+        "properties": {
+          "outputVariableArray": [
+            {
+              "outputVariable": "sharedRecordId",
+              "jsonPathExp": "$.result.sysId"
+            }
+          ],
+          "connectorId_type": null,
+          "httpRequestUrl": null,
+          "httpRequestHeaders": {
+            "Content-Type": "application/json"
+          },
+          "connectorId:name": "SNOW CCIF Amar",
+          "name": "Create_Voice_Interaction_mff_oh8",
+          "httpContentType_type": null,
+          "httpRequestMethod:name": "POST",
+          "httpRequestBodyGQL": null,
+          "httpContentType:name:name": "None",
+          "httpRequestPath": "/api/now/openframe/voice-interaction",
+          "activityName": "http-request-v2",
+          "connectorId": "19731a05-7b4d-424b-b1f2-c9f86c3b061f",
+          "httpRequestMethod_type": null,
+          "httpRequestMethod_name": "POST",
+          "_renderRequestTimestamp": 1775164636752,
+          "contentType_name": "JSON",
+          "httpQueryParameters": {},
+          "activityId": "http-request-v2",
+          "httpRequestMethod": "POST",
+          "connectorId_name": "SNOW CCIF Amar",
+          "contentType": "JSON",
+          "httpRequestBodyFormData": null,
+          "httpContentType_name": "Application/JSON",
+          "httpResponseTimeout": 2000,
+          "httpContentType:name": "Application/JSON",
+          "connectorId:type": null,
+          "contentType_type": null,
+          "authenticated": true,
+          "httpRequestMethod:type": null,
+          "contentType:name": "JSON",
+          "httpContentType": "Application/JSON",
+          "retryAttempts": "3",
+          "httpContentType:type": null,
+          "flowDecryptAccess": true,
+          "contentType:type": null,
+          "httpContentType_name:name": "None",
+          "httpRequestBody": "{\n   \"interaction\":{\n      \"userPhoneNumber\":\"{{NewPhoneContact.ANI}}\",\n      \"clientSessionId\":\"{{NewPhoneContact.InteractionId}}\",\n      \"callbackPhoneNumber\":\"{{NewPhoneContact.ANI}}\",\n      \"additionalParams\":{\n         \"direction\":\"inbound\",    \"short_description\":\"{{ServiceNow_Interaction_Description}}\"\n      }\n   },\n   \"phoneLogs\":[\n      {\n         \"call_id\":\"{{NewPhoneContact.InteractionId}}\",\n         \"start_time\":\"{{start_time}}\",\n         \"call_type\": \"incoming\",\n         \"phone_number\": \"{{NewPhoneContact.ANI}}\"\n      }\n   ]\n\n}",
+          "httpRequestBodyFiles": null,
+          "description": "Creates the ServiceNow voice interaction and stores the returned interaction sys_id in sharedRecordId."
+        }
+      },
+      "5721f3e8-54d7-4c45-9e4e-b1dac29ee640": {
+        "id": "5721f3e8-54d7-4c45-9e4e-b1dac29ee640",
+        "name": "SetVariable_subflow_params",
+        "group": "set-variable",
+        "properties": {
+          "setTo": "set-to-literal",
+          "name": "SetVariable_subflow_params",
+          "srcVariableType": "STRING",
+          "literal_invalid_error": false,
+          "activityName": "set-variable",
+          "_renderRequestTimestamp": 1775164636752,
+          "expr": "EA_Simple_ServiceNow_Subflow",
+          "activityId": "set-variable",
+          "setVariablesArray": [
+            {
+              "setTo": "set-to-literal",
+              "srcVariableType": "STRING",
+              "literal_invalid_error": false,
+              "expr": "EA_Simple_ServiceNow_Subflow",
+              "id": "f7506d58-ca12-47bc-b431-2cf2373b3c6b",
+              "literal": "EA_Simple_ServiceNow_Subflow",
+              "srcVariable": "sn_subflow_name"
+            }
+          ],
+          "flowDecryptAccess": false,
+          "srcVariable": "sn_subflow_name",
+          "description": "Sets the ServiceNow subflow name that the flow will execute after the interaction is created."
+        }
+      },
+      "d9c6d5ca-c5b8-49eb-b4fe-4faaed6206e3": {
+        "id": "d9c6d5ca-c5b8-49eb-b4fe-4faaed6206e3",
+        "name": "Execute_Subflow",
+        "group": "action",
+        "properties": {
+          "outputVariableArray": [
+            {
+              "outputVariable": "sn_subflow_message",
+              "jsonPathExp": "result.subflow_message"
+            },
+            {
+              "outputVariable": "sn_subflow_code",
+              "jsonPathExp": "result.subflow_code"
+            }
+          ],
+          "connectorId_type": null,
+          "httpRequestUrl": null,
+          "httpRequestHeaders": {
+            "Content-Type": "application/json"
+          },
+          "connectorId:name": "SNOW CCIF Amar",
+          "name": "Execute_Subflow",
+          "httpContentType_type": null,
+          "httpRequestMethod:name": "POST",
+          "httpRequestBodyGQL": null,
+          "httpContentType:name:name": "None",
+          "httpRequestPath": "/api/x_caci_crm_wxcc_vx/cisco_ccif/run_subflow",
+          "activityName": "http-request-v2",
+          "connectorId": "19731a05-7b4d-424b-b1f2-c9f86c3b061f",
+          "httpRequestMethod_type": null,
+          "httpRequestMethod_name": "POST",
+          "_renderRequestTimestamp": 1775164636752,
+          "contentType_name": "JSON",
+          "httpQueryParameters": {},
+          "activityId": "http-request-v2",
+          "httpRequestMethod": "POST",
+          "connectorId_name": "SNOW CCIF Amar",
+          "contentType": "JSON",
+          "httpRequestBodyFormData": null,
+          "httpContentType_name": "Application/JSON",
+          "httpResponseTimeout": 2000,
+          "httpContentType:name": "Application/JSON",
+          "connectorId:type": null,
+          "contentType_type": null,
+          "authenticated": true,
+          "httpRequestMethod:type": null,
+          "contentType:name": "JSON",
+          "httpContentType": "Application/JSON",
+          "retryAttempts": 1,
+          "httpContentType:type": null,
+          "flowDecryptAccess": true,
+          "contentType:type": null,
+          "httpContentType_name:name": "None",
+          "httpRequestBody": "{\n \"action_type\" : \"\",\n \"cisco_phone_number\": \"{{NewPhoneContact.ANI}}\",\n \"servicenow_subflow_name\" : \"{{sn_subflow_name}}\",\n \"cisco_collected_digits\": \"\",\n \"servicenow_interaction_sysid\" : \"{{sharedRecordId}}\"\n}",
+          "httpRequestBodyFiles": null,
+          "description": "Calls the ServiceNow subflow API with the caller ANI and interaction sys_id, then stores the returned status values."
+        }
+      }
+    },
+    "links": [
+      {
+        "id": "be26ca85-67a6-4f87-aee3-9a3c6d47b522",
+        "sourceActivityId": "c1839c44-5152-4090-9994-05062b251fe2",
+        "targetActivityId": "2800059e-5fd5-4fa7-93f1-096e221edff2",
+        "conditionExpr": "default",
+        "properties": {
+          "value": "default"
+        }
+      },
+      {
+        "id": "4690e5e6-ca0d-45ca-affc-689d4a99f92a",
+        "sourceActivityId": "2800059e-5fd5-4fa7-93f1-096e221edff2",
+        "targetActivityId": "28f963d1-7cbd-47d2-803d-6f0f4e17d395",
+        "conditionExpr": "default",
+        "properties": {
+          "value": "default"
+        }
+      },
+      {
+        "id": "299c30d9-5f6e-4080-9b32-4e622fdcd23f",
+        "sourceActivityId": "28f963d1-7cbd-47d2-803d-6f0f4e17d395",
+        "targetActivityId": "61af7935-c570-48f1-8d28-021bd414e23c",
+        "conditionExpr": "default",
+        "properties": {
+          "value": "default"
+        }
+      },
+      {
+        "id": "d25bb5cd-b887-41db-8391-1fd69e0bed14",
+        "sourceActivityId": "8465e99b-60fd-4991-b72b-20a9f4d981d5",
+        "targetActivityId": "407ae12a-3854-4a21-bfdf-3fbaf3e7d08f",
+        "conditionExpr": "out",
+        "properties": {
+          "value": "out"
+        }
+      },
+      {
+        "id": "98e2e372-0591-4738-bd55-e4bd5cf778f0",
+        "sourceActivityId": "407ae12a-3854-4a21-bfdf-3fbaf3e7d08f",
+        "targetActivityId": "540ec8c0-5b96-4f93-a172-c791ea7dafeb",
+        "conditionExpr": "default",
+        "properties": {
+          "value": "default"
+        }
+      },
+      {
+        "id": "a21a91af-ae20-4e82-9f5a-3850654f2b99",
+        "sourceActivityId": "540ec8c0-5b96-4f93-a172-c791ea7dafeb",
+        "targetActivityId": "d3b2bf1e-204e-4544-be41-e317418fb513",
+        "conditionExpr": "out",
+        "properties": {
+          "value": "out"
+        }
+      },
+      {
+        "id": "5a818d18-7d6f-491c-bdf6-7ed26cdbad2a",
+        "sourceActivityId": "d3b2bf1e-204e-4544-be41-e317418fb513",
+        "targetActivityId": "5721f3e8-54d7-4c45-9e4e-b1dac29ee640",
+        "conditionExpr": "default",
+        "properties": {
+          "value": "default"
+        }
+      },
+      {
+        "id": "2beb528d-51b8-4c13-8828-ee2dee6875ef",
+        "sourceActivityId": "5721f3e8-54d7-4c45-9e4e-b1dac29ee640",
+        "targetActivityId": "d9c6d5ca-c5b8-49eb-b4fe-4faaed6206e3",
+        "conditionExpr": "out",
+        "properties": {
+          "value": "out"
+        }
+      },
+      {
+        "id": "387e8bdd-43c3-4542-a528-108f224c1e68",
+        "sourceActivityId": "d9c6d5ca-c5b8-49eb-b4fe-4faaed6206e3",
+        "targetActivityId": "c1839c44-5152-4090-9994-05062b251fe2",
+        "conditionExpr": "default",
+        "properties": {
+          "value": "default"
+        }
+      }
+    ]
+  },
+  "diagram": {
+    "widgets": {
+      "c1839c44-5152-4090-9994-05062b251fe2": {
+        "id": "612ebca7-b2db-4b1a-bf3e-de76206d866a",
+        "type": "action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 3600,
+          "y": 2000
+        },
+        "ports": [
+          {
+            "portId": "c2e7bbcb-b109-40f0-bab7-8c9f6c76cf77",
+            "isSourcePort": true,
+            "linkId": "59367f58-9980-4760-bf58-5f9c7ba8fcb5",
+            "type": "arrow",
+            "links": [
+              "59367f58-9980-4760-bf58-5f9c7ba8fcb5"
+            ],
+            "properties": {
+              "x": 3590.350048828125,
+              "name": "in",
+              "y": 2013.5499221801758,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "42b685b2-c76d-4e72-964f-982a2221269f",
+            "isSourcePort": false,
+            "linkId": "9944ba47-85bf-475d-aaea-236b1f1fcd11",
+            "type": "arrow",
+            "links": [
+              "9944ba47-85bf-475d-aaea-236b1f1fcd11"
+            ],
+            "properties": {
+              "x": 3765.6499755859377,
+              "name": "default",
+              "y": 2013.5499221801758,
+              "label": "default",
+              "alignment": "right"
+            }
+          },
+          {
+            "portId": "710a65f4-db20-4ae0-9347-14b91719b50b",
+            "isSourcePort": false,
+            "linkId": null,
+            "type": "arrow",
+            "links": [],
+            "properties": {
+              "x": 3765.6499755859377,
+              "name": "failure",
+              "y": 2121.516596984863,
+              "label": "failure",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "name": "QueueContact_ew1_hva",
+          "priority": null,
+          "fallbackQueue": null,
+          "description": "Queues the contact to the target Webex Contact Center queue after the ServiceNow interaction and subflow steps complete.",
+          "toggle": false,
+          "activityName": "queue-contact",
+          "priority:name": null,
+          "toggleAgentAvailability": false,
+          "_renderRequestTimestamp": 1775164636751,
+          "agentAvailabilityVariable": null,
+          "fallbackQueue:type": null,
+          "queueRadioGroup": "staticQueue",
+          "priorityVariable": null,
+          "destinationVariable": null,
+          "activityId": "5f114550ef5cfc454fbbf133",
+          "priorityRadioGroup": null,
+          "fallbackQueue:name": null,
+          "destination:type": "LONGEST_AVAILABLE_AGENT",
+          "skills": null,
+          "destination:name": "WxCcQueue",
+          "flowDecryptAccess": true,
+          "destination": "cb6d8d56-d7c8-4a35-af00-e0a197d52f50",
+          "agentAvailabilityRadioGroup": null
+        }
+      },
+      "2800059e-5fd5-4fa7-93f1-096e221edff2": {
+        "id": "124d7da2-6131-4320-a079-a3e80450fc3d",
+        "type": "action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 3860,
+          "y": 2000
+        },
+        "ports": [
+          {
+            "portId": "ce8de58c-69cd-4258-ab1f-877a1f683579",
+            "isSourcePort": true,
+            "linkId": "9944ba47-85bf-475d-aaea-236b1f1fcd11",
+            "type": "arrow",
+            "links": [
+              "9944ba47-85bf-475d-aaea-236b1f1fcd11"
+            ],
+            "properties": {
+              "x": 3850.350048828125,
+              "name": "in",
+              "y": 2013.5499221801756,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "7084db5b-171e-4b2c-8200-e2c008fbe7a1",
+            "isSourcePort": false,
+            "linkId": "b656304f-3ca0-41ca-8ed6-c2592338282b",
+            "type": "arrow",
+            "links": [
+              "b656304f-3ca0-41ca-8ed6-c2592338282b"
+            ],
+            "properties": {
+              "x": 4025.6499755859377,
+              "name": "default",
+              "y": 2013.5499221801756,
+              "label": "default",
+              "alignment": "right"
+            }
+          },
+          {
+            "portId": "993487f9-3b44-4428-912c-c4256db52560",
+            "isSourcePort": false,
+            "linkId": null,
+            "type": "arrow",
+            "links": [],
+            "properties": {
+              "x": 4025.6499755859377,
+              "name": "error",
+              "y": 2121.516596984863,
+              "label": "error",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "duration": null,
+          "name": "PlayMusic_mi9",
+          "prompt:type": null,
+          "activityName": "play-music",
+          "prompt:name": "defaultmusic_on_hold.wav",
+          "_renderRequestTimestamp": 1775164636751,
+          "prompt": "defaultmusic_on_hold.wav",
+          "skip": 0,
+          "activityId": "5faa2ad13505f538acc86afc",
+          "promptDynamic": null,
+          "audioRadioGroup": "staticAudio",
+          "flowDecryptAccess": false,
+          "description": "Plays music while the contact waits in the queue-handling branch."
+        }
+      },
+      "be26ca85-67a6-4f87-aee3-9a3c6d47b522": {
+        "id": "9944ba47-85bf-475d-aaea-236b1f1fcd11",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "b638ee54-bf0a-4c21-8627-20ca0ab9e16e",
+              "type": "point",
+              "x": 3775.6499755859377,
+              "y": 2023.5499221801758
+            },
+            {
+              "id": "2a80f787-35c1-4146-be4f-43abfb6b9af7",
+              "type": "point",
+              "x": 3860.350048828125,
+              "y": 2023.5499221801756
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "42b685b2-c76d-4e72-964f-982a2221269f",
+          "activeWidgetId": "612ebca7-b2db-4b1a-bf3e-de76206d866a",
+          "point": {
+            "x": 3775,
+            "y": 2023
+          }
+        },
+        "targetPort": {
+          "id": "ce8de58c-69cd-4258-ab1f-877a1f683579",
+          "activeWidgetId": "124d7da2-6131-4320-a079-a3e80450fc3d",
+          "point": {
+            "x": 3860,
+            "y": 2023
+          }
+        }
+      },
+      "28f963d1-7cbd-47d2-803d-6f0f4e17d395": {
+        "id": "27cf6402-ed47-4f91-ac19-972978a4ea0f",
+        "type": "action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 4120,
+          "y": 2000
+        },
+        "ports": [
+          {
+            "portId": "a383cb45-ad2e-4103-b8a5-9f0167c90769",
+            "isSourcePort": true,
+            "linkId": "b656304f-3ca0-41ca-8ed6-c2592338282b",
+            "type": "arrow",
+            "links": [
+              "b656304f-3ca0-41ca-8ed6-c2592338282b"
+            ],
+            "properties": {
+              "x": 4110.350048828125,
+              "name": "in",
+              "y": 2013.5499221801756,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "2c054b3e-b130-4ec2-9f7c-7d399f93b33c",
+            "isSourcePort": false,
+            "linkId": "b7602cbe-e350-4087-92cf-2f40c81c8348",
+            "type": "arrow",
+            "links": [
+              "b7602cbe-e350-4087-92cf-2f40c81c8348"
+            ],
+            "properties": {
+              "x": 4285.649975585938,
+              "name": "default",
+              "y": 2013.5499221801756,
+              "label": "default",
+              "alignment": "right"
+            }
+          },
+          {
+            "portId": "bc2447de-600b-4927-9f62-94ec6d637b09",
+            "isSourcePort": false,
+            "linkId": null,
+            "type": "arrow",
+            "links": [],
+            "properties": {
+              "x": 4285.649975585938,
+              "name": "error",
+              "y": 2121.516596984863,
+              "label": "error",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "duration": "60",
+          "name": "PlayMusic_keb",
+          "prompt:type": null,
+          "activityName": "play-music",
+          "prompt:name": "defaultmusic_on_hold.wav",
+          "_renderRequestTimestamp": 1775164636751,
+          "prompt": "defaultmusic_on_hold.wav",
+          "skip": 0,
+          "activityId": "5faa2ad13505f538acc86afc",
+          "promptDynamic": null,
+          "audioRadioGroup": "staticAudio",
+          "flowDecryptAccess": false,
+          "description": "Plays music on hold for the active in-queue wait period."
+        }
+      },
+      "4690e5e6-ca0d-45ca-affc-689d4a99f92a": {
+        "id": "b656304f-3ca0-41ca-8ed6-c2592338282b",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "b1fee7d9-5398-4b6b-9867-47e2fa99cfc2",
+              "type": "point",
+              "x": 4035.6499755859377,
+              "y": 2023.5499221801756
+            },
+            {
+              "id": "3d0b9e17-c276-476d-b7a2-bc25fdd6faaa",
+              "type": "point",
+              "x": 4120.350048828125,
+              "y": 2023.5499221801756
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "7084db5b-171e-4b2c-8200-e2c008fbe7a1",
+          "activeWidgetId": "124d7da2-6131-4320-a079-a3e80450fc3d",
+          "point": {
+            "x": 4035,
+            "y": 2023
+          }
+        },
+        "targetPort": {
+          "id": "a383cb45-ad2e-4103-b8a5-9f0167c90769",
+          "activeWidgetId": "27cf6402-ed47-4f91-ac19-972978a4ea0f",
+          "point": {
+            "x": 4120,
+            "y": 2023
+          }
+        }
+      },
+      "61af7935-c570-48f1-8d28-021bd414e23c": {
+        "id": "2a6f61b0-2a17-45c3-bda3-0ef71a029531",
+        "type": "terminating-action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 6020,
+          "y": 2000
+        },
+        "ports": [
+          {
+            "portId": "c2c510e2-0d4c-492e-98ad-3c9152cf081d",
+            "isSourcePort": true,
+            "linkId": "b7602cbe-e350-4087-92cf-2f40c81c8348",
+            "type": "arrow",
+            "links": [
+              "b7602cbe-e350-4087-92cf-2f40c81c8348"
+            ],
+            "properties": {
+              "x": 6010.349987792969,
+              "name": "in",
+              "y": 2013.5499221801756,
+              "label": "in",
+              "alignment": "left"
+            }
+          }
+        ],
+        "properties": {
+          "name": "DisconnectContact_i6c",
+          "activityName": "disconnect-contact",
+          "activityId": "5faa898c8bf5b65b82f0706b",
+          "_renderRequestTimestamp": 1775164636751,
+          "description": "Disconnects the contact if the flow reaches the terminal hold branch without continuing service."
+        }
+      },
+      "299c30d9-5f6e-4080-9b32-4e622fdcd23f": {
+        "id": "b7602cbe-e350-4087-92cf-2f40c81c8348",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "3b73a9c2-716e-4139-9ad1-f93950429ccd",
+              "type": "point",
+              "x": 4295.649975585938,
+              "y": 2023.5499221801756
+            },
+            {
+              "id": "56b0a333-9533-44bb-8bd9-d1c0cf1c0b84",
+              "type": "point",
+              "x": 6020.349987792969,
+              "y": 2023.5499221801756
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "2c054b3e-b130-4ec2-9f7c-7d399f93b33c",
+          "activeWidgetId": "27cf6402-ed47-4f91-ac19-972978a4ea0f",
+          "point": {
+            "x": 4295,
+            "y": 2023
+          }
+        },
+        "targetPort": {
+          "id": "c2c510e2-0d4c-492e-98ad-3c9152cf081d",
+          "activeWidgetId": "2a6f61b0-2a17-45c3-bda3-0ef71a029531",
+          "point": {
+            "x": 6020,
+            "y": 2023
+          }
+        }
+      },
+      "8465e99b-60fd-4991-b72b-20a9f4d981d5": {
+        "id": "7cd75e1b-b89a-484a-a784-98d88b7d875b",
+        "type": "start",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 1040,
+          "y": 1780
+        },
+        "ports": [
+          {
+            "portId": "0c1b3f3e-d03c-4309-b2ca-7d616911faab",
+            "isSourcePort": false,
+            "linkId": "8448a27b-cf64-4c9c-be5a-cc690da7e971",
+            "type": "arrow",
+            "links": [
+              "8448a27b-cf64-4c9c-be5a-cc690da7e971"
+            ],
+            "properties": {
+              "x": 1205.6500976562502,
+              "name": "out",
+              "y": 1793.5499221801758,
+              "label": "out",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "name": "NewPhoneContact",
+          "event": "NewPhoneContact",
+          "flowType": {
+            "eventSourceName": "WebexContactCenter",
+            "eventSpecificationName": "ContactStartWorkflow",
+            "eventClassificationId": "5f10475cf021306e89e1692c",
+            "eventClassificationName": "VoiceInteractions",
+            "eventSpecificationId": "5f2d02144332507e39cc8a7f",
+            "eventSourceId": "5eff0e2eb10162499bc9f932"
+          },
+          "activityName": "NewPhoneContact",
+          "_renderRequestTimestamp": 1775164636751,
+          "activityId": "start",
+          "description": "Starts the inbound ServiceNow CCIF sample flow when a new phone contact arrives."
+        }
+      },
+      "407ae12a-3854-4a21-bfdf-3fbaf3e7d08f": {
+        "id": "a1fa5ff7-09a5-4f1c-a674-764347a86c37",
+        "type": "action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 1300,
+          "y": 1780
+        },
+        "ports": [
+          {
+            "portId": "03f71731-5fe1-456f-a679-7b6bfbc1762a",
+            "isSourcePort": true,
+            "linkId": "8448a27b-cf64-4c9c-be5a-cc690da7e971",
+            "type": "arrow",
+            "links": [
+              "8448a27b-cf64-4c9c-be5a-cc690da7e971"
+            ],
+            "properties": {
+              "x": 1290.3498046875002,
+              "name": "in",
+              "y": 1793.5499221801758,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "76f60007-fc35-4845-9e46-d8c9f7a1bc15",
+            "isSourcePort": false,
+            "linkId": "07b3cac7-301b-4277-94e0-694f192d5602",
+            "type": "arrow",
+            "links": [
+              "07b3cac7-301b-4277-94e0-694f192d5602"
+            ],
+            "properties": {
+              "x": 1465.6500976562502,
+              "name": "default",
+              "y": 1793.5499221801758,
+              "label": "default",
+              "alignment": "right"
+            }
+          },
+          {
+            "portId": "42a76ee7-6cf9-45e9-adc8-96e10b773d6c",
+            "isSourcePort": false,
+            "linkId": null,
+            "type": "arrow",
+            "links": [],
+            "properties": {
+              "x": 1465.6500976562502,
+              "name": "error",
+              "y": 1901.5165969848633,
+              "label": "error",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "name": "PlayMessage_tih",
+          "connector:type": "Cisco Cloud Text-to-Speech",
+          "toggle": true,
+          "activityName": "play-message",
+          "prompts": null,
+          "_renderRequestTimestamp": 1775164636752,
+          "connector:name": "Cisco Cloud Text-to-Speech",
+          "activityId": "5f114466ef5cfc454fbbf131",
+          "volumeGainDb": 0,
+          "promptsTts": [
+            {
+              "type": "tts",
+              "value": "HEllo, welcome to the flow template for Cisco - Service C C I F integration",
+              "name": "HEllo, welcome to the flow template for Cisco - Service C C I F integration"
+            }
+          ],
+          "connector": "Cisco Cloud Text-to-Speech",
+          "speakingRate": 1,
+          "toggleLanguage": null,
+          "voiceLanguage": null,
+          "flowDecryptAccess": false,
+          "voiceLanguage:name": null,
+          "description": "Plays the welcome prompt before the ServiceNow interaction is created."
+        }
+      },
+      "d25bb5cd-b887-41db-8391-1fd69e0bed14": {
+        "id": "8448a27b-cf64-4c9c-be5a-cc690da7e971",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "3f05c117-bc84-4a75-9d91-e6f152e7b471",
+              "type": "point",
+              "x": 1215.6500976562502,
+              "y": 1803.5499221801758
+            },
+            {
+              "id": "28b6e077-19a6-4b3f-9e95-e894a5019934",
+              "type": "point",
+              "x": 1300.3498046875002,
+              "y": 1803.5499221801758
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "0c1b3f3e-d03c-4309-b2ca-7d616911faab",
+          "activeWidgetId": "7cd75e1b-b89a-484a-a784-98d88b7d875b",
+          "point": {
+            "x": 1215,
+            "y": 1803
+          }
+        },
+        "targetPort": {
+          "id": "03f71731-5fe1-456f-a679-7b6bfbc1762a",
+          "activeWidgetId": "a1fa5ff7-09a5-4f1c-a674-764347a86c37",
+          "point": {
+            "x": 1300,
+            "y": 1803
+          }
+        }
+      },
+      "540ec8c0-5b96-4f93-a172-c791ea7dafeb": {
+        "id": "3c8d81b7-42b3-4d72-9a81-ae85923dacf8",
+        "type": "set-variable",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 1580,
+          "y": 1780
+        },
+        "ports": [
+          {
+            "portId": "5e6d11aa-846d-4654-ac61-6fec06ebbd3d",
+            "isSourcePort": true,
+            "linkId": "07b3cac7-301b-4277-94e0-694f192d5602",
+            "type": "arrow",
+            "links": [
+              "07b3cac7-301b-4277-94e0-694f192d5602"
+            ],
+            "properties": {
+              "x": 1570.3500488281252,
+              "name": "in",
+              "y": 1793.5499221801758,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "49b38ee7-f82e-415e-8898-3dc96c65d20e",
+            "isSourcePort": false,
+            "linkId": "7af42086-a0dc-4d8a-9bd5-69e96374b8d9",
+            "type": "arrow",
+            "links": [
+              "7af42086-a0dc-4d8a-9bd5-69e96374b8d9"
+            ],
+            "properties": {
+              "x": 1745.6500976562502,
+              "name": "out",
+              "y": 1793.5499221801758,
+              "label": "out",
+              "alignment": "right"
+            }
+          },
+          {
+            "portId": "1d505f69-ce63-4f8a-998c-43c5aa12ae98",
+            "isSourcePort": false,
+            "linkId": null,
+            "type": "arrow",
+            "links": [],
+            "properties": {
+              "x": 1745.6500976562502,
+              "name": "error",
+              "y": 1921.5165969848633,
+              "label": "error",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "setTo": "set-to-literal",
+          "name": "SetVariable_iw8_qf0_1g5_fdz_wfq",
+          "srcVariableType": "STRING",
+          "literal_invalid_error": false,
+          "activityName": "set-variable",
+          "_renderRequestTimestamp": 1775164636752,
+          "expr": "31038a680f73721088272fc530d1b249",
+          "activityId": "set-variable",
+          "setVariablesArray": [
+            {
+              "setTo": "set-to-literal",
+              "srcVariableType": "STRING",
+              "literal_invalid_error": false,
+              "expr": "31038a680f73721088272fc530d1b249",
+              "id": "bc537a0c-1852-4dcf-b6a7-fc0f5b05b9b9",
+              "literal": "31038a680f73721088272fc530d1b249",
+              "srcVariable": "sn_queue_sysid"
+            },
+            {
+              "setTo": "set-to-literal",
+              "srcVariableType": "STRING",
+              "literal_invalid_error": false,
+              "expr": "{{ now() | date(\"yyyy-MM-dd HH:mm:ss\", existingFormat=\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", timeZone=\"America/New_York\") }}",
+              "id": "b16fc848-32e8-4193-881f-78ebed85a539",
+              "literal": "{{ now() | date(\"yyyy-MM-dd HH:mm:ss\", existingFormat=\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", timeZone=\"America/New_York\") }}",
+              "srcVariable": "start_time"
+            }
+          ],
+          "flowDecryptAccess": true,
+          "srcVariable": "sn_queue_sysid",
+          "description": "Sets the ServiceNow queue sys_id and captures the formatted call start time for the interaction payload."
+        }
+      },
+      "98e2e372-0591-4738-bd55-e4bd5cf778f0": {
+        "id": "07b3cac7-301b-4277-94e0-694f192d5602",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "9fa58ce2-91df-4dc4-b96a-850af5b697d5",
+              "type": "point",
+              "x": 1475.6500976562502,
+              "y": 1803.5499221801758
+            },
+            {
+              "id": "4d237e91-f3e6-4da6-ab4f-676635f86ec8",
+              "type": "point",
+              "x": 1580.3500488281252,
+              "y": 1803.5499221801758
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "76f60007-fc35-4845-9e46-d8c9f7a1bc15",
+          "activeWidgetId": "a1fa5ff7-09a5-4f1c-a674-764347a86c37",
+          "point": {
+            "x": 1475,
+            "y": 1803
+          }
+        },
+        "targetPort": {
+          "id": "5e6d11aa-846d-4654-ac61-6fec06ebbd3d",
+          "activeWidgetId": "3c8d81b7-42b3-4d72-9a81-ae85923dacf8",
+          "point": {
+            "x": 1580,
+            "y": 1803
+          }
+        }
+      },
+      "d3b2bf1e-204e-4544-be41-e317418fb513": {
+        "id": "3c2b9c18-23f0-475d-8263-19d851931f1a",
+        "type": "action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 1860,
+          "y": 1780
+        },
+        "ports": [
+          {
+            "portId": "1d4a691f-e8cb-4bcf-88d0-eb631f9f60ae",
+            "isSourcePort": true,
+            "linkId": "7af42086-a0dc-4d8a-9bd5-69e96374b8d9",
+            "type": "arrow",
+            "links": [
+              "7af42086-a0dc-4d8a-9bd5-69e96374b8d9"
+            ],
+            "properties": {
+              "x": 1850.3500488281252,
+              "name": "in",
+              "y": 1793.5499221801758,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "0e16a7fc-dfdc-4d9d-a092-61befa0bad7f",
+            "isSourcePort": false,
+            "linkId": "e2128485-6ade-42be-bf02-bec48d934c20",
+            "type": "arrow",
+            "links": [
+              "e2128485-6ade-42be-bf02-bec48d934c20"
+            ],
+            "properties": {
+              "x": 2025.6500976562502,
+              "name": "default",
+              "y": 1793.5499221801758,
+              "label": "default",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "outputVariableArray": [
+            {
+              "outputVariable": "sharedRecordId",
+              "jsonPathExp": "$.result.sysId"
+            }
+          ],
+          "httpRequestUrl": null,
+          "httpRequestHeaders": {
+            "Content-Type": "application/json"
+          },
+          "connectorId:name": "SNOW CCIF Amar",
+          "name": "Create_Voice_Interaction_mff_oh8",
+          "httpRequestMethod:name": "POST",
+          "httpRequestBodyGQL": null,
+          "httpContentType:name:name": "None",
+          "httpRequestPath": "/api/now/openframe/voice-interaction",
+          "activityName": "http-request-v2",
+          "connectorId": "19731a05-7b4d-424b-b1f2-c9f86c3b061f",
+          "_renderRequestTimestamp": 1775164636752,
+          "httpQueryParameters": {},
+          "activityId": "http-request-v2",
+          "httpRequestMethod": "POST",
+          "contentType": "JSON",
+          "httpRequestBodyFormData": null,
+          "httpResponseTimeout": 2000,
+          "httpContentType:name": "Application/JSON",
+          "connectorId:type": null,
+          "authenticated": true,
+          "httpRequestMethod:type": null,
+          "contentType:name": "JSON",
+          "httpContentType": "Application/JSON",
+          "retryAttempts": "3",
+          "httpContentType:type": null,
+          "flowDecryptAccess": true,
+          "contentType:type": null,
+          "httpRequestBody": "{\n   \"interaction\":{\n      \"userPhoneNumber\":\"{{NewPhoneContact.ANI}}\",\n      \"clientSessionId\":\"{{NewPhoneContact.InteractionId}}\",\n      \"callbackPhoneNumber\":\"{{NewPhoneContact.ANI}}\",\n      \"additionalParams\":{\n         \"direction\":\"inbound\",    \"short_description\":\"{{ServiceNow_Interaction_Description}}\"\n      }\n   },\n   \"phoneLogs\":[\n      {\n         \"call_id\":\"{{NewPhoneContact.InteractionId}}\",\n         \"start_time\":\"{{start_time}}\",\n         \"call_type\": \"incoming\",\n         \"phone_number\": \"{{NewPhoneContact.ANI}}\"\n      }\n   ]\n\n}",
+          "httpRequestBodyFiles": null,
+          "description": "Creates the ServiceNow voice interaction and stores the returned interaction sys_id in sharedRecordId."
+        }
+      },
+      "a21a91af-ae20-4e82-9f5a-3850654f2b99": {
+        "id": "7af42086-a0dc-4d8a-9bd5-69e96374b8d9",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "54f4665e-5094-417b-a807-092fccede46e",
+              "type": "point",
+              "x": 1755.6500976562502,
+              "y": 1803.5499221801758
+            },
+            {
+              "id": "d9c6a8b1-ed03-4573-9f90-7d7239fd9444",
+              "type": "point",
+              "x": 1860.3500488281252,
+              "y": 1803.5499221801758
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "49b38ee7-f82e-415e-8898-3dc96c65d20e",
+          "activeWidgetId": "3c8d81b7-42b3-4d72-9a81-ae85923dacf8",
+          "point": {
+            "x": 1755,
+            "y": 1803
+          }
+        },
+        "targetPort": {
+          "id": "1d4a691f-e8cb-4bcf-88d0-eb631f9f60ae",
+          "activeWidgetId": "3c2b9c18-23f0-475d-8263-19d851931f1a",
+          "point": {
+            "x": 1860,
+            "y": 1803
+          }
+        }
+      },
+      "5721f3e8-54d7-4c45-9e4e-b1dac29ee640": {
+        "id": "e4ae3bcf-c685-4155-bca2-a7059789306f",
+        "type": "set-variable",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 2120,
+          "y": 1780
+        },
+        "ports": [
+          {
+            "portId": "bba370f4-122b-4b43-8b4b-3066f92040be",
+            "isSourcePort": true,
+            "linkId": "e2128485-6ade-42be-bf02-bec48d934c20",
+            "type": "arrow",
+            "links": [
+              "e2128485-6ade-42be-bf02-bec48d934c20"
+            ],
+            "properties": {
+              "x": 2110.3499755859375,
+              "name": "in",
+              "y": 1793.5583267211914,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "3ca7b54a-ea04-44ab-a41d-9c4b3c42ad9e",
+            "isSourcePort": false,
+            "linkId": "8902fed6-a6e9-4493-8ed7-9dd4082497a8",
+            "type": "arrow",
+            "links": [
+              "8902fed6-a6e9-4493-8ed7-9dd4082497a8"
+            ],
+            "properties": {
+              "x": 2285.6500244140625,
+              "name": "out",
+              "y": 1793.5583267211914,
+              "label": "out",
+              "alignment": "right"
+            }
+          },
+          {
+            "portId": "2695b500-6cfa-4d89-8a2f-88f54ad7895a",
+            "isSourcePort": false,
+            "linkId": null,
+            "type": "arrow",
+            "links": [],
+            "properties": {
+              "x": 2285.6500244140625,
+              "name": "error",
+              "y": 1901.5249710083008,
+              "label": "error",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "setTo": "set-to-literal",
+          "name": "SetVariable_subflow_params",
+          "srcVariableType": "STRING",
+          "literal_invalid_error": false,
+          "activityName": "set-variable",
+          "_renderRequestTimestamp": 1775164636752,
+          "expr": "EA_Simple_ServiceNow_Subflow",
+          "activityId": "set-variable",
+          "setVariablesArray": [
+            {
+              "setTo": "set-to-literal",
+              "srcVariableType": "STRING",
+              "literal_invalid_error": false,
+              "expr": "EA_Simple_ServiceNow_Subflow",
+              "id": "f7506d58-ca12-47bc-b431-2cf2373b3c6b",
+              "literal": "EA_Simple_ServiceNow_Subflow",
+              "srcVariable": "sn_subflow_name"
+            }
+          ],
+          "flowDecryptAccess": false,
+          "srcVariable": "sn_subflow_name",
+          "description": "Sets the ServiceNow subflow name that the flow will execute after the interaction is created."
+        }
+      },
+      "5a818d18-7d6f-491c-bdf6-7ed26cdbad2a": {
+        "id": "e2128485-6ade-42be-bf02-bec48d934c20",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "7fd16d50-8f51-4a6b-b4d9-08e104efc7f0",
+              "type": "point",
+              "x": 2035.6500976562502,
+              "y": 1803.5499221801758
+            },
+            {
+              "id": "f453c1e8-ea61-40cb-a94f-20e56fd32623",
+              "type": "point",
+              "x": 2120.3499755859375,
+              "y": 1803.5583267211914
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "0e16a7fc-dfdc-4d9d-a092-61befa0bad7f",
+          "activeWidgetId": "3c2b9c18-23f0-475d-8263-19d851931f1a",
+          "point": {
+            "x": 2035,
+            "y": 1803
+          }
+        },
+        "targetPort": {
+          "id": "bba370f4-122b-4b43-8b4b-3066f92040be",
+          "activeWidgetId": "e4ae3bcf-c685-4155-bca2-a7059789306f",
+          "point": {
+            "x": 2120,
+            "y": 1803
+          }
+        }
+      },
+      "d9c6d5ca-c5b8-49eb-b4fe-4faaed6206e3": {
+        "id": "3533c052-4720-4b2e-b8ac-dac943a1d212",
+        "type": "action",
+        "widgetType": "activity",
+        "label": "New Activity Widget in Diagram",
+        "point": {
+          "x": 2400,
+          "y": 1780
+        },
+        "ports": [
+          {
+            "portId": "2c56ec36-9c2e-494c-abba-2ba3a02a1438",
+            "isSourcePort": true,
+            "linkId": "8902fed6-a6e9-4493-8ed7-9dd4082497a8",
+            "type": "arrow",
+            "links": [
+              "8902fed6-a6e9-4493-8ed7-9dd4082497a8"
+            ],
+            "properties": {
+              "x": 2390.350048828125,
+              "name": "in",
+              "y": 1793.5499221801758,
+              "label": "in",
+              "alignment": "left"
+            }
+          },
+          {
+            "portId": "07467f1e-e3d2-4366-b587-e7d4025dbb30",
+            "isSourcePort": false,
+            "linkId": "59367f58-9980-4760-bf58-5f9c7ba8fcb5",
+            "type": "arrow",
+            "links": [
+              "59367f58-9980-4760-bf58-5f9c7ba8fcb5"
+            ],
+            "properties": {
+              "x": 2565.65009765625,
+              "name": "default",
+              "y": 1793.5499221801758,
+              "label": "default",
+              "alignment": "right"
+            }
+          }
+        ],
+        "properties": {
+          "outputVariableArray": [
+            {
+              "outputVariable": "sn_subflow_message",
+              "jsonPathExp": "result.subflow_message"
+            },
+            {
+              "outputVariable": "sn_subflow_code",
+              "jsonPathExp": "result.subflow_code"
+            }
+          ],
+          "httpRequestUrl": null,
+          "httpRequestHeaders": {
+            "Content-Type": "application/json"
+          },
+          "connectorId:name": "SNOW CCIF Amar",
+          "name": "Execute_Subflow",
+          "httpRequestMethod:name": "POST",
+          "httpRequestBodyGQL": null,
+          "httpContentType:name:name": "None",
+          "httpRequestPath": "/api/x_caci_crm_wxcc_vx/cisco_ccif/run_subflow",
+          "activityName": "http-request-v2",
+          "connectorId": "19731a05-7b4d-424b-b1f2-c9f86c3b061f",
+          "_renderRequestTimestamp": 1775164636752,
+          "httpQueryParameters": {},
+          "activityId": "http-request-v2",
+          "httpRequestMethod": "POST",
+          "contentType": "JSON",
+          "httpRequestBodyFormData": null,
+          "httpResponseTimeout": 2000,
+          "httpContentType:name": "Application/JSON",
+          "connectorId:type": null,
+          "authenticated": true,
+          "httpRequestMethod:type": null,
+          "contentType:name": "JSON",
+          "httpContentType": "Application/JSON",
+          "retryAttempts": 1,
+          "httpContentType:type": null,
+          "flowDecryptAccess": true,
+          "contentType:type": null,
+          "httpRequestBody": "{\n \"action_type\" : \"\",\n \"cisco_phone_number\": \"{{NewPhoneContact.ANI}}\",\n \"servicenow_subflow_name\" : \"{{sn_subflow_name}}\",\n \"cisco_collected_digits\": \"\",\n \"servicenow_interaction_sysid\" : \"{{sharedRecordId}}\"\n}",
+          "httpRequestBodyFiles": null,
+          "description": "Calls the ServiceNow subflow API with the caller ANI and interaction sys_id, then stores the returned status values."
+        }
+      },
+      "2beb528d-51b8-4c13-8828-ee2dee6875ef": {
+        "id": "8902fed6-a6e9-4493-8ed7-9dd4082497a8",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "2477054c-53d4-4034-80ec-b9f6297570e8",
+              "type": "point",
+              "x": 2295.6500244140625,
+              "y": 1803.5583267211914
+            },
+            {
+              "id": "8a199b2f-14a7-4eae-b9cb-5f58d3995f93",
+              "type": "point",
+              "x": 2400.350048828125,
+              "y": 1803.5499221801758
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "3ca7b54a-ea04-44ab-a41d-9c4b3c42ad9e",
+          "activeWidgetId": "e4ae3bcf-c685-4155-bca2-a7059789306f",
+          "point": {
+            "x": 2295,
+            "y": 1803
+          }
+        },
+        "targetPort": {
+          "id": "2c56ec36-9c2e-494c-abba-2ba3a02a1438",
+          "activeWidgetId": "3533c052-4720-4b2e-b8ac-dac943a1d212",
+          "point": {
+            "x": 2400,
+            "y": 1803
+          }
+        }
+      },
+      "387e8bdd-43c3-4542-a528-108f224c1e68": {
+        "id": "59367f58-9980-4760-bf58-5f9c7ba8fcb5",
+        "type": "arrow",
+        "widgetType": "link",
+        "label": "[object Object]",
+        "properties": {
+          "curvyness": 50,
+          "selected": false,
+          "color": "var(--mds-color-theme-outline-theme-normal)",
+          "points": [
+            {
+              "id": "e8aab99b-5bea-48fd-9602-c08c139a9d3c",
+              "type": "point",
+              "x": 2575.65009765625,
+              "y": 1803.5499221801758
+            },
+            {
+              "id": "b95aaa40-1916-4e4b-bc27-bbb87a732cad",
+              "type": "point",
+              "x": 3600.350048828125,
+              "y": 2023.5499221801758
+            }
+          ],
+          "width": 2,
+          "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+        },
+        "points": [],
+        "sourcePort": {
+          "id": "07467f1e-e3d2-4366-b587-e7d4025dbb30",
+          "activeWidgetId": "3533c052-4720-4b2e-b8ac-dac943a1d212",
+          "point": {
+            "x": 2575,
+            "y": 1803
+          }
+        },
+        "targetPort": {
+          "id": "c2e7bbcb-b109-40f0-bab7-8c9f6c76cf77",
+          "activeWidgetId": "612ebca7-b2db-4b1a-bf3e-de76206d866a",
+          "point": {
+            "x": 3600,
+            "y": 2023
+          }
+        }
+      }
+    },
+    "properties": {
+      "offsetX": -1228,
+      "offsetY": -1458.2083206176758,
+      "zoom": 100,
+      "gridSize": 20
+    }
+  },
+  "flowId": "69ced4a55365bfa8fa3660a7",
+  "eventFlows": {
+    "eventsMap": {
+      "GLOBAL_EVENTS": {
+        "id": "GLOBAL_EVENTS",
+        "name": "name",
+        "description": "description",
+        "process": {
+          "activities": {
+            "3fa359e0-4c6a-44c4-a0da-dd1908302e72": {
+              "id": "3fa359e0-4c6a-44c4-a0da-dd1908302e72",
+              "name": "StartMediaStream_abd",
+              "group": "action",
+              "properties": {
+                "name": "StartMediaStream_abd",
+                "activityName": "start-media-stream",
+                "_renderRequestTimestamp": 1775164636752,
+                "activityId": "6698cc9ec61ded2fa580fba1",
+                "flowDecryptAccess": true,
+                "description": "Starts media streaming for downstream ServiceNow transcription or media processing integrations."
+              }
+            },
+            "9f09a561-d3d8-46ed-8bf2-4a29bf30c21a": {
+              "id": "9f09a561-d3d8-46ed-8bf2-4a29bf30c21a",
+              "name": "EndFlow_gyj",
+              "group": "end",
+              "properties": {
+                "name": "EndFlow_gyj",
+                "activityName": "end",
+                "activityId": "end",
+                "_renderRequestTimestamp": 1775164636752,
+                "description": "Ends the agent-assigned event branch after the abandoned-call flag is reset."
+              }
+            },
+            "a99b1cf9-59c1-4175-aae0-d1a766e18588": {
+              "id": "a99b1cf9-59c1-4175-aae0-d1a766e18588",
+              "name": "AgentContactAssigned",
+              "group": "event",
+              "properties": {
+                "displayName": "AgentAnswered",
+                "name": "AgentContactAssigned",
+                "eventSourceName": "WebexContactCenter",
+                "event": "AgentAnswered",
+                "eventSpecificationName": "AgentContactAssigned",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "5f354a0c6fb8c44e97ccb30d",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-headset_16",
+                "description": "Handles the event that fires when an agent is assigned to the contact."
+              }
+            },
+            "87a113cf-8b95-47e5-ab22-8513febd2ab3": {
+              "id": "87a113cf-8b95-47e5-ab22-8513febd2ab3",
+              "name": "SetVariable_mii",
+              "group": "set-variable",
+              "properties": {
+                "setTo": "set-to-literal",
+                "name": "SetVariable_mii",
+                "srcVariableType": "BOOLEAN",
+                "literal_invalid_error": false,
+                "activityName": "set-variable",
+                "_renderRequestTimestamp": 1775164636752,
+                "expr": "False",
+                "activityId": "set-variable",
+                "setVariablesArray": [
+                  {
+                    "setTo": "set-to-literal",
+                    "srcVariableType": "BOOLEAN",
+                    "literal_invalid_error": false,
+                    "expr": "False",
+                    "id": "5a1a167e-9166-460f-8027-5ae4bcb1a85f",
+                    "literal": "False",
+                    "srcVariable": "Call_abandoned"
+                  }
+                ],
+                "flowDecryptAccess": false,
+                "srcVariable": "Call_abandoned",
+                "description": "Marks the call as not abandoned once an agent is assigned."
+              }
+            },
+            "4c2b6e26-f934-4488-8bee-0f1ecb1037cf": {
+              "id": "4c2b6e26-f934-4488-8bee-0f1ecb1037cf",
+              "name": "ContactEnded",
+              "group": "event",
+              "properties": {
+                "displayName": "PhoneContactEnded",
+                "name": "ContactEnded",
+                "eventSourceName": "WebexContactCenter",
+                "event": "PhoneContactEnded",
+                "eventSpecificationName": "ContactEnded",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "5f354a336fb8c44e97ccb30e",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-handset-muted_16",
+                "description": "Handles contact end events so the ServiceNow interaction can be closed when needed."
+              }
+            },
+            "3f5f6f5c-a2c0-4109-8f36-be094bf1611c": {
+              "id": "3f5f6f5c-a2c0-4109-8f36-be094bf1611c",
+              "name": "Case_call_abandoned",
+              "group": "enum-gateway",
+              "properties": {
+                "name": "Case_call_abandoned",
+                "expression:radioName": "setToVariable",
+                "menuLinks": [
+                  "0",
+                  "1"
+                ],
+                "activityName": "case-statement",
+                "_renderRequestTimestamp": 1775164636752,
+                "expression_name": "BOOLEAN",
+                "activityId": "case-statement",
+                "menuLinks:input": [
+                  "true",
+                  "false"
+                ],
+                "expression": "{{Call_abandoned}}",
+                "expression_radioName": "setToVariable",
+                "menuLinks_input": [
+                  "true",
+                  "false"
+                ],
+                "flowDecryptAccess": false,
+                "expression:name": "BOOLEAN",
+                "description": "Checks whether the contact ended before an agent was assigned by evaluating Call_abandoned."
+              }
+            },
+            "38f2e38a-9c22-4e54-885a-ccb10d41033d": {
+              "id": "38f2e38a-9c22-4e54-885a-ccb10d41033d",
+              "name": "HTTPRequest_kto_tny",
+              "group": "action",
+              "properties": {
+                "outputVariableArray": [
+                  {
+                    "outputVariable": "",
+                    "jsonPathExp": ""
+                  }
+                ],
+                "connectorId_type": null,
+                "httpRequestUrl": null,
+                "httpRequestHeaders": {
+                  "Content-Type": "application/json"
+                },
+                "connectorId:name": "SNOW CCIF Amar",
+                "name": "HTTPRequest_kto_tny",
+                "httpContentType_type": null,
+                "httpRequestMethod:name": "PATCH",
+                "httpRequestBodyGQL": null,
+                "httpContentType:name:name": "None",
+                "httpRequestPath": "/api/now/table/interaction/{{sharedRecordId}}",
+                "activityName": "http-request-v2",
+                "connectorId": "19731a05-7b4d-424b-b1f2-c9f86c3b061f",
+                "httpRequestMethod_type": null,
+                "httpRequestMethod_name": "PATCH",
+                "_renderRequestTimestamp": 1775164636752,
+                "contentType_name": "JSON",
+                "httpQueryParameters": {},
+                "activityId": "http-request-v2",
+                "httpRequestMethod": "PATCH",
+                "connectorId_name": "SNOW CCIF Amar",
+                "contentType": "JSON",
+                "httpRequestBodyFormData": null,
+                "httpContentType_name": "Application/JSON",
+                "httpResponseTimeout": 2000,
+                "httpContentType:name": "Application/JSON",
+                "connectorId:type": null,
+                "contentType_type": null,
+                "authenticated": true,
+                "httpRequestMethod:type": null,
+                "contentType:name": "JSON",
+                "httpContentType": "Application/JSON",
+                "retryAttempts": 1,
+                "httpContentType:type": null,
+                "flowDecryptAccess": true,
+                "contentType:type": null,
+                "httpContentType_name:name": "None",
+                "httpRequestBody": "{\n  \"state\": \"closed_abandoned\"\n}",
+                "httpRequestBodyFiles": null,
+                "description": "Updates the ServiceNow interaction to closed_abandoned when the contact ends before agent assignment."
+              }
+            },
+            "cb3a82b0-1f28-4b50-9e82-523d3953ee38": {
+              "id": "cb3a82b0-1f28-4b50-9e82-523d3953ee38",
+              "name": "EndFlow_gyj_utq",
+              "group": "end",
+              "properties": {
+                "name": "EndFlow_gyj_utq",
+                "activityName": "end",
+                "activityId": "end",
+                "_renderRequestTimestamp": 1775164636752,
+                "description": "Ends the contact-ended event branch after the ServiceNow update request completes."
+              }
+            },
+            "978bb979-9911-4e1a-a558-677da655d389": {
+              "id": "978bb979-9911-4e1a-a558-677da655d389",
+              "name": "AgentOfferContact",
+              "group": "event",
+              "properties": {
+                "displayName": "AgentOffered",
+                "name": "AgentOfferContact",
+                "eventSourceName": "WebexContactCenter",
+                "event": "AgentOffered",
+                "eventSpecificationName": "AgentOfferContact",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "637da544c02b556cf406d192",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-audio-call_16",
+                "description": "Captures the agent-offer event as an extension point for future routing or analytics logic."
+              }
+            },
+            "36db4223-19db-4531-bf5c-caf330aa0388": {
+              "id": "36db4223-19db-4531-bf5c-caf330aa0388",
+              "name": "FCAsk(ContactLastAgentRemoved)",
+              "group": "event",
+              "properties": {
+                "displayName": "AgentDisconnected",
+                "name": "FCAsk(ContactLastAgentRemoved)",
+                "eventSourceName": "WebexContactCenter",
+                "event": "AgentDisconnected",
+                "eventSpecificationName": "FCAsk(ContactLastAgentRemoved)",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "5ffeafa86a7eff72a481c4b5",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-headset-muted_16",
+                "description": "Captures the last-agent-removed event as an extension point for future disconnect handling."
+              }
+            },
+            "dd51bf4d-905e-47d8-8a0a-a25279d9448a": {
+              "id": "dd51bf4d-905e-47d8-8a0a-a25279d9448a",
+              "name": "GlobalErrorHandling",
+              "group": "event",
+              "properties": {
+                "displayName": "OnGlobalError",
+                "name": "GlobalErrorHandling",
+                "eventSourceName": "WebexContactCenter",
+                "event": "OnGlobalError",
+                "eventSpecificationName": "GlobalErrorHandling",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "627c0663e98eca854178bba6",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-error-legacy_16",
+                "description": "Captures global flow errors as an extension point for custom recovery logic."
+              }
+            },
+            "e0b0d70a-b3aa-4dc6-b366-4fc060a65f9a": {
+              "id": "e0b0d70a-b3aa-4dc6-b366-4fc060a65f9a",
+              "name": "ContactPredial",
+              "group": "event",
+              "properties": {
+                "displayName": "PreDial",
+                "name": "ContactPredial",
+                "eventSourceName": "WebexContactCenter",
+                "event": "PreDial",
+                "eventSpecificationName": "ContactPredial",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "63c914bebfee4622076922b1",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-other-number_16",
+                "description": "Captures the predial event as an extension point for outbound or callback scenarios."
+              }
+            },
+            "26d82b53-00f3-4f07-a038-e2cec52bf71a": {
+              "id": "26d82b53-00f3-4f07-a038-e2cec52bf71a",
+              "name": "ContactOutboundCampaignResult",
+              "group": "event",
+              "properties": {
+                "displayName": "OutboundCampaignCallResult",
+                "name": "ContactOutboundCampaignResult",
+                "eventSourceName": "WebexContactCenter",
+                "event": "OutboundCampaignCallResult",
+                "eventSpecificationName": "ContactOutboundCampaignResult",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "64b7b425b244045d52e05fe4",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-outgoing-call-legacy_16",
+                "description": "Captures outbound campaign result events as an extension point for campaign follow-up logic."
+              }
+            },
+            "c58c25e7-fb94-4abf-b0fe-7cee4ac5f2d7": {
+              "id": "c58c25e7-fb94-4abf-b0fe-7cee4ac5f2d7",
+              "name": "ContactCallbackFailed",
+              "group": "event",
+              "properties": {
+                "displayName": "CallbackFailed",
+                "name": "ContactCallbackFailed",
+                "eventSourceName": "WebexContactCenter",
+                "event": "CallbackFailed",
+                "eventSpecificationName": "ContactCallbackFailed",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "64461525b1a88734caf6c25b",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-no-phone-warning_24",
+                "description": "Captures callback failure events as an extension point for retry or remediation logic."
+              }
+            },
+            "99e43618-ba33-42ee-addb-19d1ce3016ec": {
+              "id": "99e43618-ba33-42ee-addb-19d1ce3016ec",
+              "name": "ContactAniUpdated",
+              "group": "event",
+              "properties": {
+                "displayName": "ContactAniUpdated",
+                "name": "ContactAniUpdated",
+                "eventSourceName": "WebexContactCenter",
+                "event": "ContactAniUpdated",
+                "eventSpecificationName": "ContactAniUpdated",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "97b7b425a244045d52e97fe4",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-null_0",
+                "description": "Captures ANI update events as an extension point for future synchronization logic."
+              }
+            }
+          },
+          "links": [
+            {
+              "id": "6fc9c00c-e499-4713-82f3-b05c5e74b944",
+              "sourceActivityId": "3fa359e0-4c6a-44c4-a0da-dd1908302e72",
+              "targetActivityId": "9f09a561-d3d8-46ed-8bf2-4a29bf30c21a",
+              "conditionExpr": "default",
+              "properties": {
+                "value": "default"
+              }
+            },
+            {
+              "id": "be98e735-7171-4340-bef0-2b04e49202a8",
+              "sourceActivityId": "a99b1cf9-59c1-4175-aae0-d1a766e18588",
+              "targetActivityId": "87a113cf-8b95-47e5-ab22-8513febd2ab3",
+              "conditionExpr": "out",
+              "properties": {
+                "value": "out"
+              }
+            },
+            {
+              "id": "467270e0-a797-479f-846c-22501878486b",
+              "sourceActivityId": "4c2b6e26-f934-4488-8bee-0f1ecb1037cf",
+              "targetActivityId": "3f5f6f5c-a2c0-4109-8f36-be094bf1611c",
+              "conditionExpr": "out",
+              "properties": {
+                "value": "out"
+              }
+            },
+            {
+              "id": "4db7b3ef-f414-4ead-98de-1f2bc86a99a6",
+              "sourceActivityId": "3f5f6f5c-a2c0-4109-8f36-be094bf1611c",
+              "targetActivityId": "38f2e38a-9c22-4e54-885a-ccb10d41033d",
+              "conditionExpr": "0",
+              "properties": {
+                "value": "0"
+              }
+            },
+            {
+              "id": "9e74e5e5-9cb5-483a-bb1b-784b1ccee96b",
+              "sourceActivityId": "38f2e38a-9c22-4e54-885a-ccb10d41033d",
+              "targetActivityId": "cb3a82b0-1f28-4b50-9e82-523d3953ee38",
+              "conditionExpr": "default",
+              "properties": {
+                "value": "default"
+              }
+            },
+            {
+              "id": "9bbd771d-99c1-479f-b459-7ef244491414",
+              "sourceActivityId": "3f5f6f5c-a2c0-4109-8f36-be094bf1611c",
+              "targetActivityId": "cb3a82b0-1f28-4b50-9e82-523d3953ee38",
+              "conditionExpr": "default",
+              "properties": {
+                "value": "default"
+              }
+            },
+            {
+              "id": "5c8fa288-e09b-4112-a5c6-3771f26d1977",
+              "sourceActivityId": "87a113cf-8b95-47e5-ab22-8513febd2ab3",
+              "targetActivityId": "3fa359e0-4c6a-44c4-a0da-dd1908302e72",
+              "conditionExpr": "error",
+              "properties": {
+                "value": "error"
+              }
+            },
+            {
+              "id": "874be775-7464-4f2d-9230-dcc0182986c2",
+              "sourceActivityId": "87a113cf-8b95-47e5-ab22-8513febd2ab3",
+              "targetActivityId": "3fa359e0-4c6a-44c4-a0da-dd1908302e72",
+              "conditionExpr": "out",
+              "properties": {
+                "value": "out"
+              }
+            },
+            {
+              "id": "4cc1ce42-c950-4918-bc32-23e1dd2abfac",
+              "sourceActivityId": "3f5f6f5c-a2c0-4109-8f36-be094bf1611c",
+              "targetActivityId": "cb3a82b0-1f28-4b50-9e82-523d3953ee38",
+              "conditionExpr": "1",
+              "properties": {
+                "value": "1"
+              }
+            }
+          ]
+        },
+        "onEvents": {
+          "AgentContactAssigned": "a99b1cf9-59c1-4175-aae0-d1a766e18588",
+          "ContactEnded": "4c2b6e26-f934-4488-8bee-0f1ecb1037cf",
+          "AgentOfferContact": "978bb979-9911-4e1a-a558-677da655d389",
+          "FCAsk(ContactLastAgentRemoved)": "36db4223-19db-4531-bf5c-caf330aa0388",
+          "GlobalErrorHandling": "dd51bf4d-905e-47d8-8a0a-a25279d9448a",
+          "ContactPredial": "e0b0d70a-b3aa-4dc6-b366-4fc060a65f9a",
+          "ContactOutboundCampaignResult": "26d82b53-00f3-4f07-a038-e2cec52bf71a",
+          "ContactCallbackFailed": "c58c25e7-fb94-4abf-b0fe-7cee4ac5f2d7",
+          "ContactAniUpdated": "99e43618-ba33-42ee-addb-19d1ce3016ec"
+        },
+        "diagram": {
+          "widgets": {
+            "3fa359e0-4c6a-44c4-a0da-dd1908302e72": {
+              "id": "3b995d61-f9ad-4643-b7db-f9b533604d5a",
+              "type": "action",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 760,
+                "y": 300
+              },
+              "ports": [
+                {
+                  "portId": "063e3ce3-120f-4942-8d9d-ec58dbe1b094",
+                  "isSourcePort": true,
+                  "linkId": "1a394ef9-d550-42c9-9955-d1d9fa05d07f",
+                  "type": "arrow",
+                  "links": [
+                    "1a394ef9-d550-42c9-9955-d1d9fa05d07f",
+                    "0e7d468c-22f4-41d7-b5d0-926d6c3470c2"
+                  ],
+                  "properties": {
+                    "x": 750.3499755859375,
+                    "name": "in",
+                    "y": 313.54998779296875,
+                    "label": "in",
+                    "alignment": "left"
+                  }
+                },
+                {
+                  "portId": "e85c5e15-67fc-49e8-81d8-cd161d47d239",
+                  "isSourcePort": false,
+                  "linkId": "c90aa7da-aaab-449b-9161-5bf4082f253a",
+                  "type": "arrow",
+                  "links": [
+                    "c90aa7da-aaab-449b-9161-5bf4082f253a"
+                  ],
+                  "properties": {
+                    "x": 925.6500244140625,
+                    "name": "default",
+                    "y": 313.54998779296875,
+                    "label": "default",
+                    "alignment": "right"
+                  }
+                },
+                {
+                  "portId": "38d8c991-3a09-48aa-bde1-2624a7668635",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 925.6500244140625,
+                    "name": "failure",
+                    "y": 421.51666259765625,
+                    "label": "failure",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "name": "StartMediaStream_abd",
+                "activityName": "start-media-stream",
+                "_renderRequestTimestamp": 1775164636752,
+                "activityId": "6698cc9ec61ded2fa580fba1",
+                "flowDecryptAccess": true,
+                "description": "Starts media streaming for downstream ServiceNow transcription or media processing integrations."
+              }
+            },
+            "9f09a561-d3d8-46ed-8bf2-4a29bf30c21a": {
+              "id": "6e833ef3-8eb1-4d5e-b974-10fedde4b5d8",
+              "type": "end",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 1360,
+                "y": 300
+              },
+              "ports": [
+                {
+                  "portId": "f720f2e7-f3d4-43ca-a81c-cda6778764a4",
+                  "isSourcePort": true,
+                  "linkId": "c90aa7da-aaab-449b-9161-5bf4082f253a",
+                  "type": "arrow",
+                  "links": [
+                    "c90aa7da-aaab-449b-9161-5bf4082f253a"
+                  ],
+                  "properties": {
+                    "x": 1350.3499755859375,
+                    "name": "in",
+                    "y": 313.54998779296875,
+                    "label": "in",
+                    "alignment": "left"
+                  }
+                }
+              ],
+              "properties": {
+                "name": "EndFlow_gyj",
+                "activityName": "end",
+                "activityId": "end",
+                "_renderRequestTimestamp": 1775164636752,
+                "description": "Ends the agent-assigned event branch after the abandoned-call flag is reset."
+              }
+            },
+            "6fc9c00c-e499-4713-82f3-b05c5e74b944": {
+              "id": "c90aa7da-aaab-449b-9161-5bf4082f253a",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "4d4c9bfb-99da-4f39-8be1-d644ca6f092e",
+                    "type": "point",
+                    "x": 935.6500244140625,
+                    "y": 323.54998779296875
+                  },
+                  {
+                    "id": "539d8b40-b1a5-4c90-8db6-7e7a9e00f2be",
+                    "type": "point",
+                    "x": 1360.3499755859375,
+                    "y": 323.54998779296875
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "e85c5e15-67fc-49e8-81d8-cd161d47d239",
+                "activeWidgetId": "3b995d61-f9ad-4643-b7db-f9b533604d5a",
+                "point": {
+                  "x": 935,
+                  "y": 323
+                }
+              },
+              "targetPort": {
+                "id": "f720f2e7-f3d4-43ca-a81c-cda6778764a4",
+                "activeWidgetId": "6e833ef3-8eb1-4d5e-b974-10fedde4b5d8",
+                "point": {
+                  "x": 1360,
+                  "y": 323
+                }
+              }
+            },
+            "a99b1cf9-59c1-4175-aae0-d1a766e18588": {
+              "id": "7174b3ab-1053-48a0-ba71-63c71d374afb",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": 300
+              },
+              "ports": [
+                {
+                  "portId": "e6b0842a-4200-47c7-990e-2ae2bb4e3a79",
+                  "isSourcePort": false,
+                  "linkId": "6358b56a-9352-4adc-975a-8124d95ceb00",
+                  "type": "arrow",
+                  "links": [
+                    "6358b56a-9352-4adc-975a-8124d95ceb00"
+                  ],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": 313.54998779296875,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "AgentAnswered",
+                "name": "AgentContactAssigned",
+                "eventSourceName": "WebexContactCenter",
+                "event": "AgentAnswered",
+                "eventSpecificationName": "AgentContactAssigned",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "5f354a0c6fb8c44e97ccb30d",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-headset_16",
+                "description": "Handles the event that fires when an agent is assigned to the contact."
+              }
+            },
+            "87a113cf-8b95-47e5-ab22-8513febd2ab3": {
+              "id": "4e1aa09b-117b-4b15-b97d-0a090bda56df",
+              "type": "set-variable",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 420,
+                "y": 300
+              },
+              "ports": [
+                {
+                  "portId": "19051ebd-d90c-4bf2-afc8-eed37d8e9890",
+                  "isSourcePort": true,
+                  "linkId": "6358b56a-9352-4adc-975a-8124d95ceb00",
+                  "type": "arrow",
+                  "links": [
+                    "6358b56a-9352-4adc-975a-8124d95ceb00"
+                  ],
+                  "properties": {
+                    "x": 410.3500061035156,
+                    "name": "in",
+                    "y": 313.54998779296875,
+                    "label": "in",
+                    "alignment": "left"
+                  }
+                },
+                {
+                  "portId": "c198bf9e-171f-420b-9309-8d868b8cb1b5",
+                  "isSourcePort": false,
+                  "linkId": "0e7d468c-22f4-41d7-b5d0-926d6c3470c2",
+                  "type": "arrow",
+                  "links": [
+                    "0e7d468c-22f4-41d7-b5d0-926d6c3470c2"
+                  ],
+                  "properties": {
+                    "x": 585.6500244140625,
+                    "name": "out",
+                    "y": 313.54998779296875,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                },
+                {
+                  "portId": "9d0b20ba-7917-4e95-98bb-3e26304e98ba",
+                  "isSourcePort": false,
+                  "linkId": "1a394ef9-d550-42c9-9955-d1d9fa05d07f",
+                  "type": "arrow",
+                  "links": [
+                    "1a394ef9-d550-42c9-9955-d1d9fa05d07f"
+                  ],
+                  "properties": {
+                    "x": 585.6500244140625,
+                    "name": "error",
+                    "y": 421.51666259765625,
+                    "label": "error",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "setTo": "set-to-literal",
+                "name": "SetVariable_mii",
+                "srcVariableType": "BOOLEAN",
+                "literal_invalid_error": false,
+                "activityName": "set-variable",
+                "_renderRequestTimestamp": 1775164636752,
+                "expr": "False",
+                "activityId": "set-variable",
+                "setVariablesArray": [
+                  {
+                    "setTo": "set-to-literal",
+                    "srcVariableType": "BOOLEAN",
+                    "literal_invalid_error": false,
+                    "expr": "False",
+                    "id": "5a1a167e-9166-460f-8027-5ae4bcb1a85f",
+                    "literal": "False",
+                    "srcVariable": "Call_abandoned"
+                  }
+                ],
+                "flowDecryptAccess": false,
+                "srcVariable": "Call_abandoned",
+                "description": "Marks the call as not abandoned once an agent is assigned."
+              }
+            },
+            "be98e735-7171-4340-bef0-2b04e49202a8": {
+              "id": "6358b56a-9352-4adc-975a-8124d95ceb00",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "1678a612-6aef-4415-a0e9-6e4982143b41",
+                    "type": "point",
+                    "x": 195.64999389648438,
+                    "y": 323.54998779296875
+                  },
+                  {
+                    "id": "6cc1dc31-2d00-4b1e-a11c-a4e907d67828",
+                    "type": "point",
+                    "x": 420.3500061035156,
+                    "y": 323.54998779296875
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "e6b0842a-4200-47c7-990e-2ae2bb4e3a79",
+                "activeWidgetId": "7174b3ab-1053-48a0-ba71-63c71d374afb",
+                "point": {
+                  "x": 195,
+                  "y": 323
+                }
+              },
+              "targetPort": {
+                "id": "19051ebd-d90c-4bf2-afc8-eed37d8e9890",
+                "activeWidgetId": "4e1aa09b-117b-4b15-b97d-0a090bda56df",
+                "point": {
+                  "x": 420,
+                  "y": 323
+                }
+              }
+            },
+            "4c2b6e26-f934-4488-8bee-0f1ecb1037cf": {
+              "id": "64eaa386-8a7b-4733-ad47-cebcb4dbb68e",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": -160
+              },
+              "ports": [
+                {
+                  "portId": "49c78102-46e1-4d92-a054-ea5db5ad9e38",
+                  "isSourcePort": false,
+                  "linkId": "e8fb5068-b3fd-4c07-b80a-7e5ce6eefba3",
+                  "type": "arrow",
+                  "links": [
+                    "e8fb5068-b3fd-4c07-b80a-7e5ce6eefba3"
+                  ],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": -146.4499969482422,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "PhoneContactEnded",
+                "name": "ContactEnded",
+                "eventSourceName": "WebexContactCenter",
+                "event": "PhoneContactEnded",
+                "eventSpecificationName": "ContactEnded",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "5f354a336fb8c44e97ccb30e",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-handset-muted_16",
+                "description": "Handles contact end events so the ServiceNow interaction can be closed when needed."
+              }
+            },
+            "3f5f6f5c-a2c0-4109-8f36-be094bf1611c": {
+              "id": "a3250dec-f163-4ab2-b8b2-05e6b83f4786",
+              "type": "enum-gateway",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 420,
+                "y": -160
+              },
+              "ports": [
+                {
+                  "portId": "e2d89aab-ec17-4c32-ab04-6e06e6622142",
+                  "isSourcePort": false,
+                  "linkId": "02b70622-0320-4282-9e60-4b2da1696c82",
+                  "type": "arrow",
+                  "links": [
+                    "02b70622-0320-4282-9e60-4b2da1696c82"
+                  ],
+                  "properties": {
+                    "x": 585.6500244140625,
+                    "name": "0",
+                    "y": -38.48333740234375,
+                    "label": "0",
+                    "alignment": "right"
+                  }
+                },
+                {
+                  "portId": "c5fe8c4d-8e16-495a-81d8-5d36bd65b4bb",
+                  "isSourcePort": false,
+                  "linkId": "3c4840ac-e6da-4225-98b9-91083a4cbca1",
+                  "type": "arrow",
+                  "links": [
+                    "3c4840ac-e6da-4225-98b9-91083a4cbca1"
+                  ],
+                  "properties": {
+                    "x": 585.6500244140625,
+                    "name": "1",
+                    "y": -4.5500030517578125,
+                    "label": "1",
+                    "alignment": "right"
+                  }
+                },
+                {
+                  "portId": "d107c57f-f631-496b-adc8-82c19926c030",
+                  "isSourcePort": true,
+                  "linkId": "e8fb5068-b3fd-4c07-b80a-7e5ce6eefba3",
+                  "type": "arrow",
+                  "links": [
+                    "e8fb5068-b3fd-4c07-b80a-7e5ce6eefba3"
+                  ],
+                  "properties": {
+                    "x": 410.3500061035156,
+                    "name": "in",
+                    "y": -144.4499969482422,
+                    "label": "in",
+                    "alignment": "left"
+                  }
+                },
+                {
+                  "portId": "1c86f3a6-d72e-4799-ae3a-43b0199e6ccb",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 585.6500244140625,
+                    "name": "error",
+                    "y": 121.76666259765625,
+                    "label": "error",
+                    "alignment": "right"
+                  }
+                },
+                {
+                  "portId": "5f7bcb2a-5b56-43a5-9250-afd4aad90ec2",
+                  "isSourcePort": false,
+                  "linkId": "a7993fda-7f1d-4dcc-b26c-12b40e178757",
+                  "type": "arrow",
+                  "links": [
+                    "a7993fda-7f1d-4dcc-b26c-12b40e178757"
+                  ],
+                  "properties": {
+                    "x": 585.6500244140625,
+                    "name": "default",
+                    "y": 63.83332824707031,
+                    "label": "default",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "name": "Case_call_abandoned",
+                "expression:radioName": "setToVariable",
+                "menuLinks": [
+                  "0",
+                  "1"
+                ],
+                "activityName": "case-statement",
+                "_renderRequestTimestamp": 1775164636752,
+                "activityId": "case-statement",
+                "menuLinks:input": [
+                  "true",
+                  "false"
+                ],
+                "expression": "{{Call_abandoned}}",
+                "flowDecryptAccess": false,
+                "expression:name": "BOOLEAN",
+                "description": "Checks whether the contact ended before an agent was assigned by evaluating Call_abandoned."
+              }
+            },
+            "467270e0-a797-479f-846c-22501878486b": {
+              "id": "e8fb5068-b3fd-4c07-b80a-7e5ce6eefba3",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "fef614b6-93aa-4892-935e-e39e00d45992",
+                    "type": "point",
+                    "x": 195.64999389648438,
+                    "y": -136.4499969482422
+                  },
+                  {
+                    "id": "869ae34f-117d-450c-bd86-04a838695d37",
+                    "type": "point",
+                    "x": 420.3500061035156,
+                    "y": -134.4499969482422
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "49c78102-46e1-4d92-a054-ea5db5ad9e38",
+                "activeWidgetId": "64eaa386-8a7b-4733-ad47-cebcb4dbb68e",
+                "point": {
+                  "x": 195,
+                  "y": -136
+                }
+              },
+              "targetPort": {
+                "id": "d107c57f-f631-496b-adc8-82c19926c030",
+                "activeWidgetId": "a3250dec-f163-4ab2-b8b2-05e6b83f4786",
+                "point": {
+                  "x": 420,
+                  "y": -134
+                }
+              }
+            },
+            "38f2e38a-9c22-4e54-885a-ccb10d41033d": {
+              "id": "fe7c1156-61ba-49ab-8614-f54fad80fc7a",
+              "type": "action",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 760,
+                "y": -60
+              },
+              "ports": [
+                {
+                  "portId": "32b82051-bf66-4b62-bca4-adec8bad0877",
+                  "isSourcePort": true,
+                  "linkId": "02b70622-0320-4282-9e60-4b2da1696c82",
+                  "type": "arrow",
+                  "links": [
+                    "02b70622-0320-4282-9e60-4b2da1696c82"
+                  ],
+                  "properties": {
+                    "x": 750.3499755859375,
+                    "name": "in",
+                    "y": -46.44999694824219,
+                    "label": "in",
+                    "alignment": "left"
+                  }
+                },
+                {
+                  "portId": "111c2324-526c-47a8-8034-8b25b7ebbcb6",
+                  "isSourcePort": false,
+                  "linkId": "10a5b7aa-96f2-4408-a73d-23006706acc2",
+                  "type": "arrow",
+                  "links": [
+                    "10a5b7aa-96f2-4408-a73d-23006706acc2"
+                  ],
+                  "properties": {
+                    "x": 925.6500244140625,
+                    "name": "default",
+                    "y": -46.44999694824219,
+                    "label": "default",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "outputVariableArray": [
+                  {
+                    "outputVariable": "",
+                    "jsonPathExp": ""
+                  }
+                ],
+                "httpRequestUrl": null,
+                "httpRequestHeaders": {
+                  "Content-Type": "application/json"
+                },
+                "connectorId:name": "SNOW CCIF Amar",
+                "name": "HTTPRequest_kto_tny",
+                "httpRequestMethod:name": "PATCH",
+                "httpRequestBodyGQL": null,
+                "httpContentType:name:name": "None",
+                "httpRequestPath": "/api/now/table/interaction/{{sharedRecordId}}",
+                "activityName": "http-request-v2",
+                "connectorId": "19731a05-7b4d-424b-b1f2-c9f86c3b061f",
+                "_renderRequestTimestamp": 1775164636752,
+                "httpQueryParameters": {},
+                "activityId": "http-request-v2",
+                "httpRequestMethod": "PATCH",
+                "contentType": "JSON",
+                "httpRequestBodyFormData": null,
+                "httpResponseTimeout": 2000,
+                "httpContentType:name": "Application/JSON",
+                "connectorId:type": null,
+                "authenticated": true,
+                "httpRequestMethod:type": null,
+                "contentType:name": "JSON",
+                "httpContentType": "Application/JSON",
+                "retryAttempts": 1,
+                "httpContentType:type": null,
+                "flowDecryptAccess": true,
+                "contentType:type": null,
+                "httpRequestBody": "{\n  \"state\": \"closed_abandoned\"\n}",
+                "httpRequestBodyFiles": null,
+                "description": "Updates the ServiceNow interaction to closed_abandoned when the contact ends before agent assignment."
+              }
+            },
+            "4db7b3ef-f414-4ead-98de-1f2bc86a99a6": {
+              "id": "02b70622-0320-4282-9e60-4b2da1696c82",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "3009a1b6-ea13-45dc-a847-a7f025702640",
+                    "type": "point",
+                    "x": 595.6500244140625,
+                    "y": -28.48333740234375
+                  },
+                  {
+                    "id": "74e15bc8-5d67-4ad8-9878-6d5ebfeba7fe",
+                    "type": "point",
+                    "x": 760.3499755859375,
+                    "y": -36.44999694824219
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "e2d89aab-ec17-4c32-ab04-6e06e6622142",
+                "activeWidgetId": "a3250dec-f163-4ab2-b8b2-05e6b83f4786",
+                "point": {
+                  "x": 595,
+                  "y": -28
+                }
+              },
+              "targetPort": {
+                "id": "32b82051-bf66-4b62-bca4-adec8bad0877",
+                "activeWidgetId": "fe7c1156-61ba-49ab-8614-f54fad80fc7a",
+                "point": {
+                  "x": 760,
+                  "y": -36
+                }
+              }
+            },
+            "cb3a82b0-1f28-4b50-9e82-523d3953ee38": {
+              "id": "bc892ba7-4c23-4947-974e-8ce052d062cb",
+              "type": "end",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 1360,
+                "y": 40
+              },
+              "ports": [
+                {
+                  "portId": "3137da7c-d6f8-4bb1-897c-c1c392490ed4",
+                  "isSourcePort": true,
+                  "linkId": "10a5b7aa-96f2-4408-a73d-23006706acc2",
+                  "type": "arrow",
+                  "links": [
+                    "10a5b7aa-96f2-4408-a73d-23006706acc2",
+                    "a7993fda-7f1d-4dcc-b26c-12b40e178757",
+                    "3c4840ac-e6da-4225-98b9-91083a4cbca1"
+                  ],
+                  "properties": {
+                    "x": 1350.3499755859375,
+                    "name": "in",
+                    "y": 53.55000305175781,
+                    "label": "in",
+                    "alignment": "left"
+                  }
+                }
+              ],
+              "properties": {
+                "name": "EndFlow_gyj_utq",
+                "activityName": "end",
+                "activityId": "end",
+                "_renderRequestTimestamp": 1775164636752,
+                "description": "Ends the contact-ended event branch after the ServiceNow update request completes."
+              }
+            },
+            "9e74e5e5-9cb5-483a-bb1b-784b1ccee96b": {
+              "id": "10a5b7aa-96f2-4408-a73d-23006706acc2",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "e14f8ccb-8b43-4e47-a7e1-276740f6a184",
+                    "type": "point",
+                    "x": 935.6500244140625,
+                    "y": -36.44999694824219
+                  },
+                  {
+                    "id": "00ce62dd-c322-4340-9294-b44f7677c048",
+                    "type": "point",
+                    "x": 1360.3499755859375,
+                    "y": 63.55000305175781
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "111c2324-526c-47a8-8034-8b25b7ebbcb6",
+                "activeWidgetId": "fe7c1156-61ba-49ab-8614-f54fad80fc7a",
+                "point": {
+                  "x": 935,
+                  "y": -36
+                }
+              },
+              "targetPort": {
+                "id": "3137da7c-d6f8-4bb1-897c-c1c392490ed4",
+                "activeWidgetId": "bc892ba7-4c23-4947-974e-8ce052d062cb",
+                "point": {
+                  "x": 1360,
+                  "y": 63
+                }
+              }
+            },
+            "9bbd771d-99c1-479f-b459-7ef244491414": {
+              "id": "a7993fda-7f1d-4dcc-b26c-12b40e178757",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "50918996-83bc-47e5-8451-e8da1fb43d95",
+                    "type": "point",
+                    "x": 595.6500244140625,
+                    "y": 73.83332824707031
+                  },
+                  {
+                    "id": "22d6c7fa-1e36-49ea-b4e2-a0e56726a9f4",
+                    "type": "point",
+                    "x": 1360.3499755859375,
+                    "y": 63.55000305175781
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "5f7bcb2a-5b56-43a5-9250-afd4aad90ec2",
+                "activeWidgetId": "a3250dec-f163-4ab2-b8b2-05e6b83f4786",
+                "point": {
+                  "x": 595,
+                  "y": 73
+                }
+              },
+              "targetPort": {
+                "id": "3137da7c-d6f8-4bb1-897c-c1c392490ed4",
+                "activeWidgetId": "bc892ba7-4c23-4947-974e-8ce052d062cb",
+                "point": {
+                  "x": 1360,
+                  "y": 63
+                }
+              }
+            },
+            "5c8fa288-e09b-4112-a5c6-3771f26d1977": {
+              "id": "1a394ef9-d550-42c9-9955-d1d9fa05d07f",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-cancel-normal)",
+                "points": [
+                  {
+                    "id": "c6caf845-03d8-40b0-9318-f2e1b6aa83bd",
+                    "type": "point",
+                    "x": 595.6500244140625,
+                    "y": 431.51666259765625
+                  },
+                  {
+                    "id": "7937217b-01f3-4503-a769-9d0ce8ede736",
+                    "type": "point",
+                    "x": 760.3499755859375,
+                    "y": 323.54998779296875
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "9d0b20ba-7917-4e95-98bb-3e26304e98ba",
+                "activeWidgetId": "4e1aa09b-117b-4b15-b97d-0a090bda56df",
+                "point": {
+                  "x": 595,
+                  "y": 431
+                }
+              },
+              "targetPort": {
+                "id": "063e3ce3-120f-4942-8d9d-ec58dbe1b094",
+                "activeWidgetId": "3b995d61-f9ad-4643-b7db-f9b533604d5a",
+                "point": {
+                  "x": 760,
+                  "y": 323
+                }
+              }
+            },
+            "874be775-7464-4f2d-9230-dcc0182986c2": {
+              "id": "0e7d468c-22f4-41d7-b5d0-926d6c3470c2",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "978f3223-6e48-4b5a-884f-9018a7102773",
+                    "type": "point",
+                    "x": 595.6500244140625,
+                    "y": 323.54998779296875
+                  },
+                  {
+                    "id": "9c591845-2139-401a-8b32-4ad06c3f02a7",
+                    "type": "point",
+                    "x": 760.3499755859375,
+                    "y": 323.54998779296875
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "c198bf9e-171f-420b-9309-8d868b8cb1b5",
+                "activeWidgetId": "4e1aa09b-117b-4b15-b97d-0a090bda56df",
+                "point": {
+                  "x": 595,
+                  "y": 323
+                }
+              },
+              "targetPort": {
+                "id": "063e3ce3-120f-4942-8d9d-ec58dbe1b094",
+                "activeWidgetId": "3b995d61-f9ad-4643-b7db-f9b533604d5a",
+                "point": {
+                  "x": 760,
+                  "y": 323
+                }
+              }
+            },
+            "4cc1ce42-c950-4918-bc32-23e1dd2abfac": {
+              "id": "3c4840ac-e6da-4225-98b9-91083a4cbca1",
+              "type": "arrow",
+              "widgetType": "link",
+              "label": "",
+              "properties": {
+                "curvyness": 50,
+                "selected": false,
+                "color": "var(--mds-color-theme-outline-theme-normal)",
+                "points": [
+                  {
+                    "id": "a1ac89de-e503-4487-9ae1-e9f939b7bcca",
+                    "type": "point",
+                    "x": 595.6500244140625,
+                    "y": 5.4499969482421875
+                  },
+                  {
+                    "id": "d5ae336a-95fa-4f91-8c6e-bd2ee9f87f51",
+                    "type": "point",
+                    "x": 1360.3499755859375,
+                    "y": 63.55000305175781
+                  }
+                ],
+                "width": 2,
+                "selectedColor": "var(--mds-color-theme-outline-theme-normal)"
+              },
+              "points": [],
+              "sourcePort": {
+                "id": "c5fe8c4d-8e16-495a-81d8-5d36bd65b4bb",
+                "activeWidgetId": "a3250dec-f163-4ab2-b8b2-05e6b83f4786",
+                "point": {
+                  "x": 595,
+                  "y": 5
+                }
+              },
+              "targetPort": {
+                "id": "3137da7c-d6f8-4bb1-897c-c1c392490ed4",
+                "activeWidgetId": "bc892ba7-4c23-4947-974e-8ce052d062cb",
+                "point": {
+                  "x": 1360,
+                  "y": 63
+                }
+              }
+            },
+            "978bb979-9911-4e1a-a558-677da655d389": {
+              "id": "b4537b5e-c3db-428e-8c57-c7f4cbc3a8ce",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": 820
+              },
+              "ports": [
+                {
+                  "portId": "b8f89237-4719-4a3c-a36f-e9245cae0a8a",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": 833.5499877929688,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "AgentOffered",
+                "name": "AgentOfferContact",
+                "eventSourceName": "WebexContactCenter",
+                "event": "AgentOffered",
+                "eventSpecificationName": "AgentOfferContact",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "637da544c02b556cf406d192",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-audio-call_16",
+                "description": "Captures the agent-offer event as an extension point for future routing or analytics logic."
+              }
+            },
+            "36db4223-19db-4531-bf5c-caf330aa0388": {
+              "id": "3db75e53-b484-4e37-adfe-7b1443fedb2e",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": 500
+              },
+              "ports": [
+                {
+                  "portId": "ae3e7d57-eaaa-4b5c-ac90-d7a601df033e",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": 513.5499877929688,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "AgentDisconnected",
+                "name": "FCAsk(ContactLastAgentRemoved)",
+                "eventSourceName": "WebexContactCenter",
+                "event": "AgentDisconnected",
+                "eventSpecificationName": "FCAsk(ContactLastAgentRemoved)",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "5ffeafa86a7eff72a481c4b5",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-headset-muted_16",
+                "description": "Captures the last-agent-removed event as an extension point for future disconnect handling."
+              }
+            },
+            "dd51bf4d-905e-47d8-8a0a-a25279d9448a": {
+              "id": "4bbbe0b7-1a37-40ec-bbe1-a07b7a1e6746",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": 660
+              },
+              "ports": [
+                {
+                  "portId": "0990f6bb-1180-4ba1-983c-759f917fa04c",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": 673.5499877929688,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "OnGlobalError",
+                "name": "GlobalErrorHandling",
+                "eventSourceName": "WebexContactCenter",
+                "event": "OnGlobalError",
+                "eventSpecificationName": "GlobalErrorHandling",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "627c0663e98eca854178bba6",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-error-legacy_16",
+                "description": "Captures global flow errors as an extension point for custom recovery logic."
+              }
+            },
+            "e0b0d70a-b3aa-4dc6-b366-4fc060a65f9a": {
+              "id": "8f007e86-c39e-4aae-9408-b22c2eb1700b",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 25,
+                "y": 974
+              },
+              "ports": [
+                {
+                  "portId": "6b435ecc-c13c-4396-85df-1d9a7d252b0f",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 190.64999389648438,
+                    "name": "out",
+                    "y": 987.550048828125,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "PreDial",
+                "name": "ContactPredial",
+                "eventSourceName": "WebexContactCenter",
+                "event": "PreDial",
+                "eventSpecificationName": "ContactPredial",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "63c914bebfee4622076922b1",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-other-number_16",
+                "description": "Captures the predial event as an extension point for outbound or callback scenarios."
+              }
+            },
+            "26d82b53-00f3-4f07-a038-e2cec52bf71a": {
+              "id": "7e9e0dd5-1e64-4725-9628-e8af83c52580",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 25,
+                "y": 1112
+              },
+              "ports": [
+                {
+                  "portId": "545bc6df-ff7a-4388-bcb5-d81b6862904f",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 190.64999389648438,
+                    "name": "out",
+                    "y": 1125.550048828125,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "OutboundCampaignCallResult",
+                "name": "ContactOutboundCampaignResult",
+                "eventSourceName": "WebexContactCenter",
+                "event": "OutboundCampaignCallResult",
+                "eventSpecificationName": "ContactOutboundCampaignResult",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "64b7b425b244045d52e05fe4",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-outgoing-call-legacy_16",
+                "description": "Captures outbound campaign result events as an extension point for campaign follow-up logic."
+              }
+            },
+            "c58c25e7-fb94-4abf-b0fe-7cee4ac5f2d7": {
+              "id": "6bac9fb3-cc38-429f-aaef-657dc3d98467",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": 1260
+              },
+              "ports": [
+                {
+                  "portId": "f93e580e-bc8f-44bc-bd76-b91f4b2f59df",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": 1273.550048828125,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "CallbackFailed",
+                "name": "ContactCallbackFailed",
+                "eventSourceName": "WebexContactCenter",
+                "event": "CallbackFailed",
+                "eventSpecificationName": "ContactCallbackFailed",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "64461525b1a88734caf6c25b",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-no-phone-warning_24",
+                "description": "Captures callback failure events as an extension point for retry or remediation logic."
+              }
+            },
+            "99e43618-ba33-42ee-addb-19d1ce3016ec": {
+              "id": "0fd06cfe-3dab-4b27-974b-8854f9ef8e4f",
+              "type": "event",
+              "widgetType": "activity",
+              "label": "New Activity Widget in Diagram",
+              "point": {
+                "x": 20,
+                "y": 1420
+              },
+              "ports": [
+                {
+                  "portId": "032688cb-6b09-4c6b-bdc2-b8d5c973fc28",
+                  "isSourcePort": false,
+                  "linkId": null,
+                  "type": "arrow",
+                  "links": [],
+                  "properties": {
+                    "x": 185.64999389648438,
+                    "name": "out",
+                    "y": 1433.550048828125,
+                    "label": "out",
+                    "alignment": "right"
+                  }
+                }
+              ],
+              "properties": {
+                "displayName": "ContactAniUpdated",
+                "name": "ContactAniUpdated",
+                "eventSourceName": "WebexContactCenter",
+                "event": "ContactAniUpdated",
+                "eventSpecificationName": "ContactAniUpdated",
+                "activityName": "Event",
+                "_renderRequestTimestamp": 1775164636752,
+                "eventClassificationId": "5f10475cf021306e89e1692c",
+                "eventClassificationName": "VoiceInteractions",
+                "activityId": "event",
+                "eventSpecificationId": "97b7b425a244045d52e97fe4",
+                "eventSourceId": "5eff0e2eb10162499bc9f932",
+                "iconDiagram": "icon-null_0",
+                "description": "Captures ANI update events as an extension point for future synchronization logic."
+              }
+            }
+          },
+          "properties": {}
+        }
+      }
+    },
+    "properties": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "zoom": 0,
+      "gridSize": 20
+    }
+  },
+  "runtimeVariables": [],
+  "validating": true,
+  "persist": true,
+  "validationResults": [],
+  "createdBy": "admin_test@email.carehybrid.com",
+  "createdDate": "2026-04-02T21:17:20.526",
+  "lastModifiedDate": "2026-04-02T21:17:20.526",
+  "lastModifiedBy": "admin_test@email.carehybrid.com",
+  "variableOrders": {
+    "pop-over": [
+      {
+        "name": "ani",
+        "variableSeq": "0"
+      },
+      {
+        "name": "dn",
+        "variableSeq": "1"
+      },
+      {
+        "name": "sharedRecordId",
+        "variableSeq": "2"
+      }
+    ],
+    "interaction-panel": [
+      {
+        "name": "ani",
+        "variableSeq": "0"
+      },
+      {
+        "name": "dn",
+        "variableSeq": "1"
+      },
+      {
+        "name": "sharedRecordId",
+        "variableSeq": "2"
+      },
+      {
+        "name": "sn_queue_sysid",
+        "variableSeq": "3"
+      }
+    ]
+  },
+  "settings": [
+    {
+      "name": "flowDecryptAccess",
+      "value": "true",
+      "type": "BOOLEAN",
+      "group": "decryption"
+    },
+    {
+      "name": "delayTime",
+      "value": "2000",
+      "type": "STRING",
+      "group": "activityWait"
+    }
+  ],
+  "associatedChannels": [],
+  "flowOutcome": null
+}
