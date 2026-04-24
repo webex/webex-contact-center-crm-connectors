@@ -18,16 +18,6 @@ This folder contains the Salesforce call center metadata used with the Webex Con
 
 | Section | Element | Label | Default value |
 | --- | --- | --- | --- |
-| WxCC Settings | `openCtiWxCCRegion` | WxCC Region | eu2 |
-| WxCC Settings | `wxccWebRtcDomain` | WxCC WebRTC Domain | (blank) |
-| General Information | `reqInternalName` | Internal Name | wxCcCallCenter |
-| General Information | `reqDisplayName` | Display Name | WxCC Call Center |
-| General Information | `reqDescription` | Description | Webex Contact Center Salesforce Integration |
-| General Information | `reqAdapterUrl` | CTI Adapter URL | https://wxcc-crmconnectors.ciscoccservice.com/salesforce/connector/v1/index.html |
-| General Information | `reqUseApi` | Use CTI API | true |
-| General Information | `reqSoftphoneHeight` | Softphone Height | 550 |
-| General Information | `reqSoftphoneWidth` | Softphone Width | 400 |
-| General Information | `reqSalesforceCompatibilityMode` | Salesforce Compatibility Mode | Lightning |
 | Call Activity Record Creation | `subjectDateFormat` | Date Format In Subject | MM-DD-YYYY hh:mm a |
 | Call Activity Record Creation | `subjectTemplate` | Subject Template | {direction} Call {activityDatetime} |
 | Call Activity Record Creation | `recordCallLiveNotes` | Record Call Live Notes | true |
