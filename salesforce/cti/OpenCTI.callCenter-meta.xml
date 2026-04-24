@@ -31,11 +31,13 @@
   </section>
   <section sortOrder="3" name="outdialData" label="Outdial Configuration">
     <item sortOrder="0" name="outdialRemovePrefix" label="Remove Phone Number Prefix Strings"></item>
+    <item sortOrder="1" name="openCtiEnableCrmSearch" label="Search For CRM records">false</item>
   </section>
   <section sortOrder="4" name="advancedScreenPopData" label="Advanced Screen Pop Search Configuration">
     <item sortOrder="0" name="openCtiEnableAdvancedScreenPop" label="Advanced Screen Pop Enabled">false</item>
     <item sortOrder="1" name="openCtiCadSearchVariable" label="CAD Variable Name"></item>
     <item sortOrder="2" name="openCtiRemoveANIPrefix" label="Remove ANI Prefix Strings"></item>
+    <item sortOrder="3" name="openCtiFallbackToAni" label="Fallback to ANI">false</item>
   </section>
   <section sortOrder="5" name="objectCreationManagement" label="Case Management">
     <item sortOrder="0" name="createObjectIncoming" label="Auto Case Creation For Inbound Calls">false</item>
