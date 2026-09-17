@@ -55,5 +55,7 @@
   </section>
   <section sortOrder="8" name="widgetSettings" label="Widget Settings">
     <item sortOrder="0" name="sendBrowserNotifications" label="Send Browser Notifications">false</item>
+    <item sortOrder="1" name="alertAgentsBeforeTerminatingActiveSession" label="Alert Agents Before Terminating Active Session">false</item>
+    <item sortOrder="2" name="popoutMode" label="Popout Mode">SF</item>
   </section>
 </callCenter>
